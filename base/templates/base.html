@@ -1,0 +1,35 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'midnight': '#18181b',
+                        'primary': '#9bfa18',
+                        'danger': '#ff2643',
+                    }
+                },
+            }
+        }
+    </script>
+    {% block meta %}
+    {% endblock meta %}
+</head>
+
+<body class="bg-midnight">
+    <section id="body-wrapper" class="max-w-5xl mx-auto pt-24">
+        <h1>Hello</h1>
+        {% block content %}
+        {% endblock content %}
+    </section>
+</body>
+
+</html>
