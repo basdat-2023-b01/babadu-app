@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filter %}
+
+{% block meta %}
+<title>Babadu | Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<section id="authentication-login" class="h-screen w-full xl:px-20 lg:px-10 sm:px-2 px-4 py-16">
+    <div class="h-full flex flex-col items-center justify-center">
+        <div class="w-full md:w-4/6 my-6 mx-auto h-auto p-4 border border-shark-500 rounded-lg">
+            <form method="POST" action="" class="w-full flex flex-col gap-4">
+                <div class="text-2xl font-semibold text-white text-center">
+                    Login Form
+                </div>
+                {% csrf_token %}
+                <section id="auth-login-input" class="space-y-2">
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            Nama
+                        </div>
+                        <div>
+                            {{ login_form.nama|addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            Email
+                        </div>
+                        <div>
+                            {{ login_form.email|addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                        </div>
+                    </div>
+                </section>
+
+                <section id="auth-login-submit" class="space-y-1 mt-2">
+                    <button
+                        class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
+                        type="submit" value="Login">
+                        Login
+                    </button>
+                    <div class="grid grid-cols-9 items-center text-shark-400">
+                        <hr class="border-shark-400 col-span-4">
+                        <div class="text-xs text-center col-span-1">
+                            Atau
+                        </div>
+                        <hr class="border-shark-400 col-span-4">
+                    </div>
+                    <h1 class="mt-2 text-shark-200 text-base text-center">Don't have an account yet?
+                        <a class="text-primary-400 hover:underline transition" href="{% url 'authentication:register' %}">
+                            Create Account
+                        </a>
+                    </h1>
+                </section>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
