@@ -13,6 +13,7 @@ class LoginForm(UserCreationForm):
     email = forms.CharField(label='email', widget=forms.TextInput(
         attrs={'id': 'login-email', 'placeholder': 'Email'}))
 
+
 class RegisterAtletForm(UserCreationForm):
     PLAY_CHOICES = [
         ('1', 'Left'),
@@ -55,4 +56,56 @@ class RegisterAtletForm(UserCreationForm):
         widget=forms.RadioSelect(
             choices=KELAMIN_CHOICES
         )
+    )
+
+
+class RegisterPelatihForm(UserCreationForm):
+    KATEGORI_CHOICES = [
+        ('tunggal putra', 'tunggal putra'),
+        ('tunggal putri', 'tunggal putri'),
+        ('ganda putra', 'ganda putra'),
+        ('ganda putri', 'ganda putri'),
+        ('ganda campuran', 'ganda campuran'),
+    ]
+    nama = forms.CharField(
+        label='nama',
+        min_length=5,
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={'id': 'register-pelatih-nama', 'placeholder': 'Nama'})
+    )
+    email = forms.CharField(label='email', widget=forms.TextInput(
+        attrs={'id': 'register-pelatih-email', 'placeholder': 'Email'}))
+    negara = forms.CharField(
+        label='negara',
+        min_length=5,
+        max_length=25,
+        widget=forms.TextInput(
+            attrs={'id': 'register-pelatih-negara', 'placeholder': 'Negara'})
+    )
+    kategori = forms.MultipleChoiceField(
+        label='register-pelatih-kategori',
+        widget=forms.CheckboxSelectMultiple,
+        choices=KATEGORI_CHOICES)
+    tanggal_mulai = forms.DateField(
+        label='register-pelatih-tanggal-mulai',
+        widget=forms.DateInput(attrs={'type': 'datetime-local'})
+    )
+
+class RegisterUmpireForm(UserCreationForm):
+    nama = forms.CharField(
+        label='nama',
+        min_length=5,
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={'id': 'register-umpire-nama', 'placeholder': 'Nama'})
+    )
+    email = forms.CharField(label='email', widget=forms.TextInput(
+        attrs={'id': 'register-umpire-email', 'placeholder': 'Email'}))
+    negara = forms.CharField(
+        label='negara',
+        min_length=5,
+        max_length=25,
+        widget=forms.TextInput(
+            attrs={'id': 'register-umpire-negara', 'placeholder': 'Negara'})
     )

@@ -128,7 +128,49 @@
                 </form>
 
                 <form id="register-form-pelatih" method="POST" action="">
-                    <section id="auth-login-submit" class="space-y-1 mt-2">
+                    <section id="register-pelatih-field" class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-2">
+                            <div class="text-white font-semibold">
+                                Jenis kelamin
+                            </div>
+                            <div>
+                               {{pelatih_form.nama | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="text-white font-semibold">
+                                Jenis kelamin
+                            </div>
+                            <div>
+                               {{pelatih_form.email | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="text-white font-semibold">
+                                Jenis kelamin
+                            </div>
+                            <div>
+                                {{pelatih_form.negara | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="text-white font-semibold">
+                                Jenis kelamin
+                            </div>
+                            <div>
+                               {{pelatih_form.kategori | addclass:"text-shark-400 pl-2 border-shark-400"}}
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="text-white font-semibold">
+                                Jenis kelamin
+                            </div>
+                            <div>
+                               {{pelatih_form.tanggal_mulai | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                            </div>
+                        </div>
+                    </section>
+                    <section id="auth-login-submit" class="space-y-1 mt-6">
                         <button
                             class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
                             type="submit" value="Login">
@@ -151,7 +193,33 @@
                 </form>
 
                 <form id="register-form-umpire" method="POST" action="">
-                    <section id="auth-login-submit" class="space-y-1 mt-2">
+                    <section id="register-atlet-field" class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-2">
+                            <div class="text-white font-semibold">
+                                Nama
+                            </div>
+                            <div>
+                                {{umpire_form.nama | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="text-white font-semibold">
+                                Email
+                            </div>
+                            <div>
+                                {{umpire_form.email | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="text-white font-semibold">
+                                Negara
+                            </div>
+                            <div>
+                                {{umpire_form.negara | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                            </div>
+                        </div>
+                    </section>
+                    <section id="auth-login-submit" class="space-y-1 mt-6">
                         <button
                             class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
                             type="submit" value="Login">
