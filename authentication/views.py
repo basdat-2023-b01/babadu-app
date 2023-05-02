@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from authentication.forms import LoginForm
+from authentication.forms import *
 
 def login(request):
     if request.method == 'POST':
@@ -10,4 +10,7 @@ def login(request):
     return render(request, 'login.html', context)
 
 def register(request):
-    return render(request, 'register.html')
+    context = {
+        'atlet_form':RegisterAtletForm(),
+        }
+    return render(request, 'register.html', context)
