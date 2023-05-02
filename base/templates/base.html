@@ -24,11 +24,12 @@
 </head>
 
 <body class="bg-midnight">
-    <section id="body-wrapper" class="max-w-5xl mx-auto pt-24">
-        <h1>Hello</h1>
+    {% include 'navbar.html' %}
+    <section id="body-wrapper" class="max-w-7xl mx-auto pt-24">
         {% block content %}
         {% endblock content %}
     </section>
+    {% include 'footer.html' %}
 </body>
 
 </html>
