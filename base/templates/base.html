@@ -11,9 +11,35 @@
             theme: {
                 extend: {
                     colors: {
-                        'midnight': '#18181b',
-                        'primary': '#9bfa18',
-                        'danger': '#ff2643',
+                        primary: {
+                            '50': '#f2fcf1',
+                            '100': '#dff9df',
+                            '200': '#b5f0b6',
+                            '300': '#8ee790',
+                            '400': '#56d25a',
+                            '500': '#2fb833',
+                            '600': '#219825',
+                            '700': '#1e7721',
+                            '800': '#1c5f20',
+                            '900': '#194e1c',
+                            '950': '#082b0b',
+                        },
+                        shark: {
+                            '50': '#f6f6f7',
+                            '100': '#e2e3e5',
+                            '200': '#c5c6ca',
+                            '300': '#a0a0a8',
+                            '400': '#7b7c86',
+                            '500': '#61616b',
+                            '600': '#4c4c55',
+                            '700': '#3f4046',
+                            '800': '#35353a',
+                            '900': '#27272a',
+                            '950': '#18181b',
+                        },
+                        midnight: '#18181b',
+                        danger: '#ff2643',
+
                     }
                 },
             }
@@ -25,11 +51,10 @@
 
 <body class="bg-midnight">
     {% include 'navbar.html' %}
-    <section id="body-wrapper" class="max-w-7xl mx-auto pt-24">
+    <section id="body-wrapper" class="max-w-6xl mx-auto">
         {% block content %}
         {% endblock content %}
     </section>
-    {% include 'footer.html' %}
 </body>
 
 </html>
