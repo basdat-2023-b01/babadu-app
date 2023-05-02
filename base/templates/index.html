@@ -32,20 +32,26 @@
             </div>
         </section>
         <section id="buttons" class="w-full">
-            <div class="max-w-lg mx-auto space-y-2 text-white text-lg font-semibold">
-                <button class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer">
-                    Login
-                </button>
-                <div class="grid grid-cols-7 items-center text-shark-400">
+            <div class="max-w-lg mx-auto text-white text-lg font-semibold">
+                <a href="{% url 'authentication:login' %}">
+                    <button
+                        class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer">
+                        Login
+                    </button>
+                </a>
+                <div class="grid grid-cols-7 items-center text-shark-400 my-2">
                     <hr class="border-shark-400 col-span-3">
                     <div class="text-xs col-span-1">
                         Atau
                     </div>
                     <hr class="border-shark-400 col-span-3">
                 </div>
-                <button class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer">
-                    Register
-                </button>
+                <a href="{% url 'authentication:register' %}">
+                    <button
+                        class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer">
+                        Register
+                    </button>
+                </a>
             </div>
         </section>
         <section class="h-4" />
