@@ -5,4 +5,5 @@ urlpatterns = [
     path('authentication/', include('authentication.urls')),
     path('event/', include('event.urls')),
     path('hasil-pertandingan/', include('hasil_pertandingan.urls')),
+    path('dashboard/', include('dashboard.urls')),
 ]
