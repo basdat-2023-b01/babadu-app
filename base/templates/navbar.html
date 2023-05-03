@@ -7,6 +7,7 @@
                 </a>
             </section>
             <section id="navbar-menus" class="flex flex-row gap-6 text-shark-400">
+                {% if request.session.is_atlet or request.session.is_pelatih or request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
                     <a href="">
                         <button class="navbar-menu dashboard">
@@ -14,13 +15,62 @@
                         </button>
                     </a>
                 </div>
+                {% endif %}
+                {% if request.session.is_atlet %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
                     <a href="">
-                        <button class="navbar-menu daftar-atlet">
+                        <button class="navbar-menu tes-kualifikasi">
+                            Tes Kualifikasi
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_atlet %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu daftar-event">
+                            Daftar Event
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_atlet %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu enrolled-event">
+                            Enrolled Event
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_atlet %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu daftar-sponsor">
+                            Daftar Sponsor
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_pelatih or request.session.is_umpire %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu daftar atlet">
                             Daftar Atlet
                         </button>
                     </a>
                 </div>
+                {% endif %}
+                {% if request.session.is_pelatih %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu list-atlet">
+                            List Atlet
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
                     <a href="{% url 'event:main' %}">
                         <button class="navbar-menu event">
@@ -28,6 +78,8 @@
                         </button>
                     </a>
                 </div>
+                {% endif %}
+                {% if request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
                     <a href="{% url 'hasil-pertandingan:main' %}">
                         <button class="navbar-menu hasil-pertandingan">
@@ -35,6 +87,7 @@
                         </button>
                     </a>
                 </div>
+                {% endif %}
                 <div class="cursor-pointer hover:text-danger transition">
                     <a href="" class="navbar-menu">
                         Logout
