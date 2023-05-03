@@ -9,7 +9,7 @@
             <section id="navbar-menus" class="flex flex-row gap-6 text-shark-400">
                 {% if request.session.is_atlet or request.session.is_pelatih or request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="">
+                    <a href="{% url 'dashboard:main' %}">
                         <button class="navbar-menu dashboard">
                             Dashboard
                         </button>
