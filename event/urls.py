@@ -4,8 +4,9 @@ from event.views import *
 app_name = 'event'
 
 urlpatterns = [
-    path('', main, name='main'),
-    path('<uuid:id>/', daftar_event, name='get-daftar-event'),
-    path('<uuid:id1>/daftar-kategori/<uuid:id2>', daftar_kategori, name='get-daftar-kategori'),
-    path('pertandingan/<uuid:id>', pertandingan, name='pertandingan')
+    path('lihat/', lihat_event_view, name='lihat'),
+    path('lihat/pertandingan/<uuid:id>', pertandingan, name='pertandingan'),
+    path('daftar/', daftar_stadium_view, name='daftar'),
+    path('daftar/<uuid:id>/', daftar_event_view, name='daftar-event'),
+    path('daftar/<uuid:id1>/kategori/<uuid:id2>', daftar_kategori_view, name='daftar-kategori'),
 ]

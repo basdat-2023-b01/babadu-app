@@ -27,7 +27,7 @@
                 {% endif %}
                 {% if request.session.is_atlet %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="">
+                    <a href="{% url 'event:daftar' %}">
                         <button class="navbar-menu daftar-event">
                             Daftar Event
                         </button>
@@ -72,7 +72,7 @@
                 {% endif %}
                 {% if request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'event:main' %}">
+                    <a href="{% url 'event:lihat' %}">
                         <button class="navbar-menu event">
                             Lihat Event
                         </button>
