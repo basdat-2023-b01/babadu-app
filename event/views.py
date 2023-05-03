@@ -1,4 +1,10 @@
 from django.shortcuts import render
 
-def event_view(request):
-    return render(request, 'event.html')
+def main(request):
+    return render(request, 'daftar_stadium.html')
+
+def daftar_event(request, id):
+    return render(request, 'daftar_event.html')
+
+def daftar_kategori(request, id1,id2):
+    return render(request, 'daftar_kategori.html')
