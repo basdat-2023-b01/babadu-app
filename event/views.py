@@ -8,3 +8,6 @@ def daftar_event(request, id):
 
 def daftar_kategori(request, id1,id2):
     return render(request, 'daftar_kategori.html')
+
+def pertandingan(request, id):
+    return render(request, 'pertandingan.html')
