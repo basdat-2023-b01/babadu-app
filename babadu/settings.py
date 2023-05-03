@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     # application goes here:
     'base',
     'authentication',
-    'pertandingan',
     'event'
 ]
 
