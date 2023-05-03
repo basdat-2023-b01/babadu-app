@@ -25,6 +25,23 @@
                 </div>
             </div>
         </section>
+        <section id="dashboard">
+            {% if request.session.is_atlet %}
+            <section id="dashboard-atlet">
+                Atlet
+            </section>
+            {% endif %}
+            {% if request.session.is_pelatih %}
+            <section id="dashboard-pelatih">
+                Pelatih
+            </section>
+            {% endif %}
+            {% if request.session.is_umpire %}
+            <section id="dashboard-umpire">
+                Umpire
+            </section>
+            {% endif %}
+        </section>
     </div>
 </section>
 
