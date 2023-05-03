@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     # application goes here:
     'base',
     'authentication',
-    'event'
+    'event',
+    'hasil_pertandingan',
 ]
 
 MIDDLEWARE = [

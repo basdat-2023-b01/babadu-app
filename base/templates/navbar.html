@@ -7,6 +7,7 @@
                 </a>
             </section>
             <section id="navbar-menus" class="flex flex-row gap-6 text-shark-400">
+                {% if request.session.is_atlet or request.session.is_pelatih or request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
                     <a href="">
                         <button class="navbar-menu dashboard">
@@ -14,32 +15,86 @@
                         </button>
                     </a>
                 </div>
+                {% endif %}
+                {% if request.session.is_atlet %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
                     <a href="">
-                        <button class="navbar-menu daftar-atlet">
+                        <button class="navbar-menu tes-kualifikasi">
+                            Tes Kualifikasi
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_atlet %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="{% url 'event:daftar' %}">
+                        <button class="navbar-menu daftar-event">
+                            Daftar Event
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_atlet %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu enrolled-event">
+                            Enrolled Event
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_atlet %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu daftar-sponsor">
+                            Daftar Sponsor
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_pelatih %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu daftar atlet">
                             Daftar Atlet
                         </button>
                     </a>
                 </div>
+                {% endif %}
+                {% if request.session.is_pelatih %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'event:main' %}">
+                    <a href="">
+                        <button class="navbar-menu list-atlet">
+                            List Atlet
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
+                {% if request.session.is_umpire %}
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="{% url 'event:lihat' %}">
                         <button class="navbar-menu event">
                             Lihat Event
                         </button>
                     </a>
                 </div>
+                {% endif %}
+                {% if request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="">
-                        <button class="navbar-menu pertandingan">
+                    <a href="{% url 'hasil-pertandingan:main' %}">
+                        <button class="navbar-menu hasil-pertandingan">
                             Hasil Pertandingan
                         </button>
                     </a>
                 </div>
+                {% endif %}
+                {% if request.session.is_atlet or request.session.is_pelatih or request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-danger transition">
                     <a href="" class="navbar-menu">
                         Logout
                     </a>
                 </div>
+                {% endif %}
             </section>
         </div>
     </div>
@@ -47,9 +102,7 @@
 
 <script>
     $(document).ready(function () {
-        var currentPath = window.location.pathname;
-        currentPath = currentPath.replace(/^\/|\/$/g, "");
-        console.log($(`.${currentPath}`));
+        var currentPath = window.location.pathname.split('/')[1];
         $('.navbar-menu').removeClass('text-primary-500');
         $(`.${currentPath}`).addClass('text-primary-500');
     });

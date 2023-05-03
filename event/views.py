@@ -1,13 +1,19 @@
 from django.shortcuts import render
 
-def main(request):
+
+def lihat_event_view(request):
+    return render(request, 'lihat_event.html')
+
+def daftar_stadium_view(request):
     return render(request, 'daftar_stadium.html')
 
-def daftar_event(request, id):
+def daftar_event_view(request, id):
     return render(request, 'daftar_event.html')
 
-def daftar_kategori(request, id1,id2):
+
+def daftar_kategori_view(request, id1, id2):
     return render(request, 'daftar_kategori.html')
+
 
 def pertandingan(request, id):
     return render(request, 'pertandingan.html')
