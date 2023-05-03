@@ -6,9 +6,52 @@
                     Babadu
                 </a>
             </section>
-            <section id="menu">
-
+            <section id="navbar-menus" class="flex flex-row gap-6 text-shark-400">
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu dashboard">
+                            Dashboard
+                        </button>
+                    </a>
+                </div>
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu daftar-atlet">
+                            Daftar Atlet
+                        </button>
+                    </a>
+                </div>
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="{% url 'event:main' %}">
+                        <button class="navbar-menu event">
+                            Lihat Event
+                        </button>
+                    </a>
+                </div>
+                <div class="cursor-pointer hover:text-primary-400 transition">
+                    <a href="">
+                        <button class="navbar-menu pertandingan">
+                            Hasil Pertandingan
+                        </button>
+                    </a>
+                </div>
+                <div class="cursor-pointer hover:text-danger transition">
+                    <a href="" class="navbar-menu">
+                        Logout
+                    </a>
+                </div>
             </section>
         </div>
     </div>
 </nav>
+
+<script>
+    $(document).ready(function () {
+        var currentPath = window.location.pathname;
+        currentPath = currentPath.replace(/^\/|\/$/g, "");
+        console.log($(`.${currentPath}`));
+        $('.navbar-menu').removeClass('text-primary-500');
+        $(`.${currentPath}`).addClass('text-primary-500');
+    });
+
+</script>
