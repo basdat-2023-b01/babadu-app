@@ -52,7 +52,7 @@
                     </a>
                 </div>
                 {% endif %}
-                {% if request.session.is_pelatih or request.session.is_umpire %}
+                {% if request.session.is_pelatih %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
                     <a href="">
                         <button class="navbar-menu daftar atlet">
@@ -88,11 +88,13 @@
                     </a>
                 </div>
                 {% endif %}
+                {% if request.session.is_atlet or request.session.is_pelatih or request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-danger transition">
                     <a href="" class="navbar-menu">
                         Logout
                     </a>
                 </div>
+                {% endif %}
             </section>
         </div>
     </div>
