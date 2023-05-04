@@ -42,12 +42,15 @@
                         </div>
                     </div>
                 </section>
-                <h1 class="text-center">
-                    <a class="hover:text-primary-500 hover:underline transition"
-                        href="{% url 'atlet:lihat' %}">
-                        SUBMIT
-                    </a>
-                </h1>
+                <section id="auth-login-submit" class="space-y-1 mt-6">
+                    <button
+                        class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
+                        type="submit">
+                        <a href="{% url 'atlet:lihat' %}">
+                            SUBMIT
+                        </a>
+                    </button>
+                </section>
             </form>
         </div>
     </div>
