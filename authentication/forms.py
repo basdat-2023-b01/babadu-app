@@ -92,6 +92,7 @@ class RegisterPelatihForm(UserCreationForm):
         widget=forms.DateInput(attrs={'type': 'datetime-local'})
     )
 
+
 class RegisterUmpireForm(UserCreationForm):
     nama = forms.CharField(
         label='nama',

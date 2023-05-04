@@ -25,38 +25,74 @@
                 </div>
             </div>
         </section>
-        <section class="pt-4 border border-shark-400 rounded-lg overflow-hidden flex flex-col w-full">
+        <section id="enrolled-events"
+            class="pt-4 border border-shark-400 rounded-lg overflow-hidden flex flex-col w-full h-[44vh]">
             <section class="space-y-2">
                 <div class="text-xl text-center font-semibold pb-2 text-primary-500">
                     ENROLLED EVENT
                 </div>
                 <hr class="border-shark-400">
             </section>
-            <section class="border border-shark-400 p-4 m-4 rounded-lg">
-                <div class="flex flex-row items-center justify-between">
-                    <div class="text-2xl font-semibold">
-                        Event A
+            <section class="flex flex-col overflow-auto py-4 space-y-4">
+                {% for i in 'ABCD' %}
+                <section id="enrolled-event-card" class="border border-shark-400 p-4 mx-4 rounded-lg">
+                    <div class="flex flex-row items-center justify-between">
+                        <div class="text-2xl text-primary-500 font-semibold">
+                            Event {{i}}
+                        </div>
+                        <div class="text-end">
+                            <Div class="text-sm">
+                                Stadium
+                            </Div>
+                            <Div class="text-xl">
+                                GBK
+                            </Div>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <Div class="text-sm">
-                            Stadium
-                        </Div>
-                        <Div class="text-xl">
-                            GBK
-                        </Div>
+                    <hr class="border-shark-400 my-2">
+                    <div class="grid grid-cols-2 gap-4 py-2">
+                        <div class="col-span-1 border border-shark-400 p-4 rounded-lg">
+                            <div>
+                                Hadiah
+                            </div>
+                            <div>
+                                Rp 5.000.000
+                            </div>
+                        </div>
+                        <div class="col-span-1 border border-shark-400 p-4 rounded-lg">
+                            <div>
+                                Kategori Superseries
+                            </div>
+                            <div>
+                                S10
+                            </div>
+                        </div>
+                        <div class="col-span-1 border border-shark-400 p-4 rounded-lg">
+                            <div>
+                                Tanggal Mulai - Tanggal Selesai
+                            </div>
+                            <div>
+                                [27-09-2023] - [12-12-2023]
+                            </div>
+                        </div>
+                        <div class="col-span-1 border border-shark-400 p-4 rounded-lg">
+                            <div>
+                                Kapasitas
+                            </div>
+                            <div>
+                                18/20
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <hr class="border-shark-400 my-2">
-                <div class="grid grid-cols-2 gap-4 py-2">
-                  
-                </div>
-                <hr class="border-shark-400 my-2">
-                <button
-                    class="bg-primary-500 w-full py-2 rounded-lg hover:bg-danger transition cursor-pointer text-white font-semibold"
-                    type="submit" value="Login">
-                    Unenroll
-                </button>
-                <hr class="border-shark-400 my-2">
+                    <hr class="border-shark-400 my-2">
+                    <button
+                        class="bg-primary-500 w-full py-2 my-2 rounded-lg hover:bg-danger transition cursor-pointer text-white font-semibold"
+                        type="submit" value="Login">
+                        Unenroll
+                    </button>
+                    <hr class="border-shark-400 my-2">
+                </section>
+                {% endfor %}
             </section>
         </section>
     </div>
