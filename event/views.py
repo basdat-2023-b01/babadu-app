@@ -14,6 +14,9 @@ def daftar_event_view(request, id):
 def daftar_kategori_view(request, id1, id2):
     return render(request, 'daftar_kategori.html')
 
+def enrolled_event_view(request):
+    return render(request, 'enrolled_event.html')
 
-def pertandingan(request, id):
+
+def pertandingan_view(request, id):
     return render(request, 'pertandingan.html')
