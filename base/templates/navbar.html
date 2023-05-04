@@ -54,7 +54,7 @@
                 {% endif %}
                 {% if request.session.is_pelatih %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="">
+                    <a href="{% url 'atlet:daftar' %}">
                         <button class="navbar-menu daftar atlet">
                             Daftar Atlet
                         </button>
@@ -63,7 +63,7 @@
                 {% endif %}
                 {% if request.session.is_pelatih %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="">
+                    <a href="{% url 'atlet:lihat' %}">
                         <button class="navbar-menu list-atlet">
                             List Atlet
                         </button>
