@@ -49,7 +49,7 @@ class RegisterAtletForm(UserCreationForm):
         min_value=1,
         max_value=200,
         widget=forms.NumberInput(
-            attrs={'id': 'register-atlet-tinggi-badan', 'placeholder': 'Negara'})
+            attrs={'id': 'register-atlet-tinggi-badan', 'placeholder': 'Tinggi badam'})
     )
     jenis_kelamin = forms.CharField(
         label='jenis kelamin',
@@ -91,6 +91,7 @@ class RegisterPelatihForm(UserCreationForm):
         label='register-pelatih-tanggal-mulai',
         widget=forms.DateInput(attrs={'type': 'datetime-local'})
     )
+
 
 class RegisterUmpireForm(UserCreationForm):
     nama = forms.CharField(

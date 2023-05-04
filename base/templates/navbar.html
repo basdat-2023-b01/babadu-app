@@ -28,7 +28,7 @@
                 {% if request.session.is_atlet %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
                     <a href="{% url 'event:daftar' %}">
-                        <button class="navbar-menu daftar-event">
+                        <button class="navbar-menu daftar">
                             Daftar Event
                         </button>
                     </a>
@@ -36,7 +36,7 @@
                 {% endif %}
                 {% if request.session.is_atlet %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="">
+                    <a href="{% url 'event:lihat-enrolled-event' %}">
                         <button class="navbar-menu enrolled-event">
                             Enrolled Event
                         </button>
@@ -102,9 +102,9 @@
 
 <script>
     $(document).ready(function () {
-        var currentPath = window.location.pathname.split('/')[1];
+        var currentPath = window.location.pathname.split('/');
+        currentPath = currentPath.pop() || currentPath.pop();
         $('.navbar-menu').removeClass('text-primary-500');
         $(`.${currentPath}`).addClass('text-primary-500');
     });
-
 </script>
