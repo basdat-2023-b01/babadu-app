@@ -7,4 +7,5 @@ urlpatterns = [
     path('hasil-pertandingan/', include('hasil_pertandingan.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('tes-kualifikasi/', include('tes_kualifikasi.urls')),
+    path('atlet/', include('atlet.urls')),
 ]
