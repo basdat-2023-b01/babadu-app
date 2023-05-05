@@ -19,7 +19,7 @@
                 {% if request.session.is_atlet %}
                 <div class="cursor-pointer hover:text-primary-400 transition">
                     <a href="{% url 'tes-kualifikasi:data-kualifikasi' %}">
-                        <button class="navbar-menu tes-kualifikasi">
+                        <button class="navbar-menu tes-kualifikasi daftar-tes pertanyaan">
                             Tes Kualifikasi
                         </button>
                     </a>
@@ -102,6 +102,7 @@
 
 <script>
     $(document).ready(function () {
+        const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
         var currentPath = window.location.pathname.split('/');
         currentPath = currentPath.pop() || currentPath.pop();
         $('.navbar-menu').removeClass('text-primary-500');
