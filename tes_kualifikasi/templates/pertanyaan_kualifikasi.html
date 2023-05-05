@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filter %}
+
+{% block meta %}
+<title>Babadu | Tes Kualifikasi</title>
+{% endblock meta %}
+
+{% block content %}
+
+<section id="authentication" class="h-screen w-full xl:px-20 lg:px-10 sm:px-2 px-4">
+    <div class="h-full flex flex-col items-center justify-center text-white">
+        <section id="b01" class="w-full">
+            <div class="max-w-md mx-auto p-4 border border-shark-400 rounded-lg">
+                <div class="flex flex-row items-center justify-start gap-4">
+                    <div class="font-semibold text-lg p-4 bg-primary-500 rounded-md">
+                        B01
+                    </div>
+                    <div class="text-start text-shark-400">
+                        <a href="/">
+                            <span
+                                class="text-white font-semibold hover:text-primary-500 transition cursor-pointer">Babadu.b01</span>
+                        </a>
+                        dibuat untuk memenuhi tugas kelompok pada mata kuliah Basis Data.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="w-full md:w-4/6 my-6 mx-auto h-auto py-4 border border-shark-500 rounded-lg">
+            <form method="POST" action="" class="w-full flex flex-col gap-4">
+                <div class="text-2xl font-semibold text-primary-400 text-center">
+                    PERTANYAAN KUALIFIKASI
+                </div>
+                <hr class="border-shark-400">
+                <section id="pertanyaan-kualifikasi-field" class="flex flex-col gap-4 h-[45vh] overflow-auto px-4">
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            1. The rules for modern badminton were developed in which country during the 19th century?
+                        </div>
+                        <div>
+                            {{pertanyaan_kualifikasi_form.nomor_satu | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                        </div>
+                    </div>
+                    <hr class="border-shark-400">
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            2. In a badminton game, the winner is the first one to reach … points.
+                        </div>
+                        <div>
+                            {{pertanyaan_kualifikasi_form.nomor_dua | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                        </div>
+                    </div>
+                    <hr class="border-shark-400">
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            3. What is the name of the international governing body for badminton recognised by the International Olympic Committee?
+                        </div>
+                        <div>
+                            {{pertanyaan_kualifikasi_form.nomor_tiga | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                        </div>
+                    </div>
+                    <hr class="border-shark-400">
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            4. When does the umpire call the score out loud during a badminton game?
+                        </div>
+                        <div>
+                            {{pertanyaan_kualifikasi_form.nomor_empat | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                        </div>
+                    </div>
+                    <hr class="border-shark-400">
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            5. Which term is used when a player violates the rules?
+                        </div>
+                        <div>
+                            {{pertanyaan_kualifikasi_form.nomor_lima | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                        </div>
+                    </div>
+                </section>
+                <hr class="border-shark-400">
+                <section id="auth-login-submit" class="space-y-1 px-4">
+                    <button
+                        class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
+                        type="submit">
+                        SUBMIT
+                    </button>
+                </section>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
