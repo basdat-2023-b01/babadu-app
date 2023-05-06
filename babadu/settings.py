@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'dashboard',
     'tes_kualifikasi',
     'atlet',
+    'sponsor',
 ]
 
 MIDDLEWARE = [

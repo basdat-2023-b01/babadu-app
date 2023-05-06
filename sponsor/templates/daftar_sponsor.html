@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filter %}
+
+{% block meta %}
+<title>Babadu | Daftar Atlet</title>
+{% endblock meta %}
+
+{% block content %}
+
+<section id="authentication" class="h-screen w-full xl:px-20 lg:px-10 sm:px-2 px-4">
+    <div class="h-full flex flex-col gap-8 items-center justify-center text-white">
+        <section id="b01" class="w-full">
+            <div class="max-w-md mx-auto p-4 border border-shark-400 rounded-lg">
+                <div class="flex flex-row items-center justify-start gap-4">
+                    <div class="font-semibold text-lg p-4 bg-primary-500 rounded-md">
+                        B01
+                    </div>
+                    <div class="text-start text-shark-400">
+                        <a href="/">
+                            <span
+                                class="text-white font-semibold hover:text-primary-500 transition cursor-pointer">Babadu.b01</span>
+                        </a>
+                        dibuat untuk memenuhi tugas kelompok pada mata kuliah Basis Data.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="w-full md:w-4/6 my-6 mx-auto h-auto p-4 border border-shark-500 rounded-lg">
+            <form method="POST" action="" class="w-full flex flex-col gap-4">
+                <div class="text-2xl font-semibold text-primary-400 text-center">
+                    DAFTAR SPONSOR
+                </div>
+                <hr class="border-shark-400">
+                <section id="daftar-atlet-field" class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            Nama Sponsor:
+                        </div>
+                        <div>
+                            {{daftar_sponsor_form.daftar_sponsor | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            Tanggal Mulai:
+                        </div>
+                        <div>
+                            <div date-rangepicker class="flex items-center">
+                                <div class="relative">
+                                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                      <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                  </div>
+                                  <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white font-semibold">
+                            Tanggal Selesai:
+                        </div>
+                        <div>
+                            <div date-rangepicker class="flex items-center">
+                                <div class="relative">
+                                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                      <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                  </div>
+                                  <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <hr class="border-shark-400">
+                <section id="auth-login-submit" class="space-y-1">
+                    <button
+                        class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
+                        type="submit">
+                        <a href="{% url 'atlet:lihat' %}">
+                            SUBMIT
+                        </a>
+                    </button>
+                </section>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
