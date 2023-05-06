@@ -89,7 +89,7 @@ class RegisterPelatihForm(UserCreationForm):
         choices=KATEGORI_CHOICES)
     tanggal_mulai = forms.DateField(
         label='register-pelatih-tanggal-mulai',
-        widget=forms.DateInput(attrs={'type': 'datetime-local'})
+        widget=forms.DateInput(attrs={'type': 'date'})
     )
 
 

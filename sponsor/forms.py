@@ -20,5 +20,12 @@ class DaftarSponsorForm(forms.Form):
             choices=SPONSOR
         )
     )
-    date_field = forms.DateField()
+    tanggal_mulai = forms.DateField(
+        label='register-pelatih-tanggal-mulai',
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
+    tanggal_selesai = forms.DateField(
+        label='register-pelatih-tanggal-mulai',
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
     
