@@ -28,12 +28,84 @@
         <section id="dashboard" class="w-full pt-4 flex flex-col border border-shark-400 rounded-lg overf">
             {% if request.session.is_atlet %}
             <section id="dashboard-atlet">
-                Atlet
+                <div class="text-2xl text-center text-primary-500 font-semibold">
+                    Atlet
+                </div>
+                <hr class="border border-shark-500 mt-2">
+                <table class="min-w-full text-sm font-light overflow-hidden">
+                    <tbody>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Nama Lengkap</td>
+                            <td class="whitespace-nowrap px-6 py-4">Davidbeck Hamings</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Negara</td>
+                            <td class="whitespace-nowrap px-6 py-4">Indonesian</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Email</td>
+                            <td class="whitespace-nowrap px-6 py-4">davidbeck.hamings@ristek.cs.ui.ac.id</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Tanggal Lahir</td>
+                            <td class="whitespace-nowrap px-6 py-4">12-12-1990</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Play</td>
+                            <td class="whitespace-nowrap px-6 py-4">Right Hand</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Jenis Kelamin</td>
+                            <td class="whitespace-nowrap px-6 py-4">Pria</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Pelatih</td>
+                            <td class="whitespace-nowrap px-6 py-4">-</td>
+                        </tr>
+                        <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Pelatih</td>
+                            <td class="whitespace-nowrap px-6 py-4">Qualified</td>
+                        </tr>
+                        <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">World Rank</td>
+                            <td class="whitespace-nowrap px-6 py-4">1</td>
+                        </tr>
+                        <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Total Poin</td>
+                            <td class="whitespace-nowrap px-6 py-4">9999999</td>
+                        </tr>
+                </table>
             </section>
             {% endif %}
             {% if request.session.is_pelatih %}
             <section id="dashboard-pelatih">
-                Pelatih
+                <div class="text-2xl text-center text-primary-500 font-semibold">
+                    Pelatih
+                </div>
+                <hr class="border border-shark-500 mt-2">
+                <table class="min-w-full text-sm font-light overflow-hidden">
+                    <tbody>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Nama Lengkap</td>
+                            <td class="whitespace-nowrap px-6 py-4">surya dharma</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Negara</td>
+                            <td class="whitespace-nowrap px-6 py-4">Indonesian</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Email</td>
+                            <td class="whitespace-nowrap px-6 py-4">surya.dharma@ristek.cs.ui.ac.id</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Spesialisasi Kategori</td>
+                            <td class="whitespace-nowrap px-6 py-4">Teknik Smash, Teknik Netting, Teknik Service</td>
+                        </tr>
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">Tanggal Mulai</td>
+                            <td class="whitespace-nowrap px-6 py-4">12-12-2022</td>
+                        </tr>
+                </table>
             </section>
             {% endif %}
             {% if request.session.is_umpire %}
@@ -42,17 +114,17 @@
                     Umpire
                 </div>
                 <hr class="border border-shark-500 mt-2">
-                <table class="min-w-full text-sm font-light my-4">
+                <table class="min-w-full text-sm font-light overflow-hidden">
                     <tbody>
-                        <tr class="border-none">
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Nama</td>
                             <td class="whitespace-nowrap px-6 py-4">John Smith</td>
                         </tr>
-                        <tr class="border-none">
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Negara</td>
                             <td class="whitespace-nowrap px-6 py-4">Indonesian</td>
                         </tr>
-                        <tr class="border-none">
+                        <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Email</td>
                             <td class="whitespace-nowrap px-6 py-4">john.smith@ristek.cs.ui.ac.id</td>
                         </tr>
