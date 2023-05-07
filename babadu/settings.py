@@ -38,7 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # application goes here:
-    'base'
+    'base',
+    'authentication',
+    'event',
+    'hasil_pertandingan',
+    'dashboard',
+    'tes_kualifikasi',
+    'atlet',
+    'sponsor',
 ]
 
 MIDDLEWARE = [

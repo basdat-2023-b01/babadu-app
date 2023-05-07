@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Babadu | Daftar Event</title>
+{% endblock meta %}
+
+{% block content %}
+
+<section id="authentication" class="h-screen w-full xl:px-20 lg:px-10 sm:px-2 px-4">
+    <div class="h-full flex flex-col gap-8 items-center justify-center text-white">
+        <section id="b01" class="w-full">
+            <div class="max-w-md mx-auto p-4 border border-shark-400 rounded-lg">
+                <div class="flex flex-row items-center justify-start gap-4">
+                    <div class="font-semibold text-lg p-4 bg-primary-500 rounded-md">
+                        B01
+                    </div>
+                    <div class="text-start text-shark-400">
+                        <a href="/">
+                            <span
+                                class="text-white font-semibold hover:text-primary-500 transition cursor-pointer">Babadu.b01</span>
+                        </a>
+                        dibuat untuk memenuhi tugas kelompok pada mata kuliah Basis Data.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pt-4 border border-shark-400 rounded-lg overflow-hidden flex flex-col w-full">
+            <section class="space-y-2">
+                <div class="text-xl text-center font-semibold pb-2 text-primary-500">
+                    DAFTAR EVENT
+                </div>
+                <hr class="border-shark-400">
+            </section>
+            <table class="min-w-full text-sm font-light text-center">
+                <thead class="border-b font-medium border-shark-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-4">Nama Event</th>
+                        <th scope="col" class="px-6 py-4">Total Hadiah</th>
+                        <th scope="col" class="px-6 py-4">Tanggal Mulai</th>
+                        <th scope="col" class="px-6 py-4">Kategori</th>
+                        <th scope="col" class="px-6 py-4">Kapasitas</th>
+                        <th scope="col" class="px-6 py-4">Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                        <td class="whitespace-nowrap px-6 py-4">Event A</td>
+                        <td class="whitespace-nowrap px-6 py-4">Rp 7.000.000</td>
+                        <td class="whitespace-nowrap px-6 py-4">01-05-2023</td>
+                        <td class="whitespace-nowrap px-6 py-4">S11</td>
+                        <td class="whitespace-nowrap px-6 py-4">50/64</td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <a href="kategori/d92f105e-7b0f-43af-ae63-e2ee1d7c9b57" class="hover:text-primary-500 hover:underline transition">
+                                Pilih
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                        <td class="whitespace-nowrap px-6 py-4">Event B</td>
+                        <td class="whitespace-nowrap px-6 py-4">Rp 9.000.000</td>
+                        <td class="whitespace-nowrap px-6 py-4">27-07-2023</td>
+                        <td class="whitespace-nowrap px-6 py-4">S1</td>
+                        <td class="whitespace-nowrap px-6 py-4">50/70</td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <a href="kategori/d92f105e-7b0f-43af-ae63-e2ee1d7c9b57" class="hover:text-primary-500 hover:underline transition">
+                                Pilih
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                        <td class="whitespace-nowrap px-6 py-4">Event C</td>
+                        <td class="whitespace-nowrap px-6 py-4">Rp 14.000.000</td>
+                        <td class="whitespace-nowrap px-6 py-4">22-11-2023</td>
+                        <td class="whitespace-nowrap px-6 py-4">S13</td>
+                        <td class="whitespace-nowrap px-6 py-4">40/80</td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <a href="kategori/d92f105e-7b0f-43af-ae63-e2ee1d7c9b57" class="hover:text-primary-500 hover:underline transition">
+                                Pilih
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</section>
+
+{% endblock content %}
