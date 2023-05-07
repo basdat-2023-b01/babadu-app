@@ -76,13 +76,6 @@ class RegisterPelatihForm(UserCreationForm):
     )
     email = forms.CharField(label='email', widget=forms.TextInput(
         attrs={'id': 'register-pelatih-email', 'placeholder': 'Email'}))
-    negara = forms.CharField(
-        label='negara',
-        min_length=5,
-        max_length=25,
-        widget=forms.TextInput(
-            attrs={'id': 'register-pelatih-negara', 'placeholder': 'Negara'})
-    )
     kategori = forms.MultipleChoiceField(
         label='register-pelatih-kategori',
         widget=forms.CheckboxSelectMultiple,
