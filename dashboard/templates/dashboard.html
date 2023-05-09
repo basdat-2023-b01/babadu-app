@@ -52,27 +52,45 @@
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Play</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.play_right }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                {% if request.session.play_right %}
+                                    Right Hand
+                                {% else %}
+                                    Left Hand
+                                {% endif %}
+                            </td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Jenis Kelamin</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.jenis_kelamin }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                {% if request.session.jenis_kelamin %}
+                                    Putra
+                                {% else %}
+                                    Putri
+                                {% endif %}
+                            </td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Pelatih</td>
-                            <td class="whitespace-nowrap px-6 py-4">-</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ pelatih }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Status</td>
-                            <td class="whitespace-nowrap px-6 py-4">Qualified</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ status_kualifikasi }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">World Rank</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.world_rank }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ world_rank }}</td>
                         </tr>
                         <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Total Poin</td>
-                            <td class="whitespace-nowrap px-6 py-4">9999999</td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                {% if status_kualifikasi == 'Qualified' %}
+                                    {{ total_point }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
                         </tr>
                 </table>
             </section>

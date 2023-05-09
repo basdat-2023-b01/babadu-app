@@ -50,15 +50,15 @@ def login(request):
         if len(res) == 1:
             mem = res[0]
             for attr in mem:
-                print(mem[attr])
                 if isinstance(mem[attr], uuid.UUID):
                     request.session[attr] = str(mem[attr])
                 elif isinstance(mem[attr], datetime.date):
-                    request.session[attr] = mem[attr].strftime('%Y-%m-%d')
+                    date = datetime.datetime.strptime(str(mem[attr]), '%Y-%m-%d')
+                    formatted_date = date.strftime('%d %B %Y')
+                    request.session[attr] = formatted_date
                 else:
                     request.session[attr] = mem[attr]
             request.session[SESSION_ROLE_KEYS[mem['member_type']]] = True
-            print('session id: ' ,request.session['id'])
             return redirect('/dashboard')     
         else:
             print('invalid')
@@ -77,5 +77,8 @@ def register(request):
 def logout(request):
     if "id" in request.session:
         request.session.clear()
+        request.session['is_atlet'] = False
+        request.session['is_pelatih'] = False
+        request.session['is_umpire'] = False
         return redirect('/')
     return redirect('/')
