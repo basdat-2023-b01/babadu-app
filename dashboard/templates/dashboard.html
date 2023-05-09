@@ -36,39 +36,39 @@
                     <tbody>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Nama Lengkap</td>
-                            <td class="whitespace-nowrap px-6 py-4">Davidbeck Hamings</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.nama }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Negara</td>
-                            <td class="whitespace-nowrap px-6 py-4">Indonesian</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.negara_asal }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Email</td>
-                            <td class="whitespace-nowrap px-6 py-4">davidbeck.hamings@ristek.cs.ui.ac.id</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.email }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Tanggal Lahir</td>
-                            <td class="whitespace-nowrap px-6 py-4">12-12-1990</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.tgl_lahir }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Play</td>
-                            <td class="whitespace-nowrap px-6 py-4">Right Hand</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.play_right }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Jenis Kelamin</td>
-                            <td class="whitespace-nowrap px-6 py-4">Pria</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.jenis_kelamin }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Pelatih</td>
                             <td class="whitespace-nowrap px-6 py-4">-</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                            <td class="whitespace-nowrap px-6 py-4">Pelatih</td>
+                            <td class="whitespace-nowrap px-6 py-4">Status</td>
                             <td class="whitespace-nowrap px-6 py-4">Qualified</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">World Rank</td>
-                            <td class="whitespace-nowrap px-6 py-4">1</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.world_rank }}</td>
                         </tr>
                         <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Total Poin</td>
@@ -87,19 +87,19 @@
                     <tbody>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Nama Lengkap</td>
-                            <td class="whitespace-nowrap px-6 py-4">surya dharma</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.nama }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Email</td>
-                            <td class="whitespace-nowrap px-6 py-4">surya.dharma@ristek.cs.ui.ac.id</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.email }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Spesialisasi Kategori</td>
-                            <td class="whitespace-nowrap px-6 py-4">Teknik Smash, Teknik Netting, Teknik Service</td>
+                            <td class="whitespace-nowrap px-6 py-4"> </td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Tanggal Mulai</td>
-                            <td class="whitespace-nowrap px-6 py-4">12-12-2022</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.tanggal_mulai }}</td>
                         </tr>
                 </table>
             </section>
@@ -114,15 +114,15 @@
                     <tbody>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Nama</td>
-                            <td class="whitespace-nowrap px-6 py-4">John Smith</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.nama }}</td>
                         </tr>
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Negara</td>
-                            <td class="whitespace-nowrap px-6 py-4">Indonesian</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.negara }}</td>
                         </tr>
                         <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">Email</td>
-                            <td class="whitespace-nowrap px-6 py-4">john.smith@ristek.cs.ui.ac.id</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ request.session.email }}</td>
                         </tr>
                 </table>
             </section>

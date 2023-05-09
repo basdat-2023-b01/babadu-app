@@ -5,7 +5,7 @@ from authentication.forms import *
 from django.db import connection
 from base.helper.function import parse
 
-session_role_keys = {
+SESSION_ROLE_KEYS = {
     'atlet': 'is_atlet',
     'pelatih': 'is_pelatih',
     'umpire': 'is_umpire',
@@ -57,7 +57,7 @@ def login(request):
                     request.session[attr] = mem[attr].strftime('%Y-%m-%d')
                 else:
                     request.session[attr] = mem[attr]
-            request.session[session_role_keys[mem['member_type']]] = True
+            request.session[SESSION_ROLE_KEYS[mem['member_type']]] = True
             print('session id: ' ,request.session['id'])
             return redirect('/dashboard')     
         else:
@@ -65,7 +65,6 @@ def login(request):
 
     context = {'login_form': LoginForm()}
     return render(request, 'login.html', context)
-
 
 def register(request):
     context = {
@@ -80,37 +79,3 @@ def logout(request):
         request.session.clear()
         return redirect('/')
     return redirect('/')
-
-
-def is_valid(data):
-    return True if len(data) == 1 else False
-
-
-def is_atlet(id):
-    query = f"""
-        select * from atlet where id = '{id}';
-    """
-    cursor = connection.cursor()
-    cursor.execute(query)
-    res = parse(cursor)
-    return True if res else False
-
-
-def is_pelatih(id):
-    query = f"""
-        select * from pelatih where id = '{id}';
-    """
-    cursor = connection.cursor()
-    cursor.execute(query)
-    res = parse(cursor)
-    return True if res else False
-
-
-def is_umpire(id):
-    query = f"""
-        select * from umpire where id = '{id}';
-    """
-    cursor = connection.cursor()
-    cursor.execute(query)
-    res = parse(cursor)
-    return True if res else False
