@@ -63,11 +63,26 @@ def dashboard_view(request):
             cursor.execute(query)
             context['total_point'] = parse(cursor)[0]['total_points']
             
-            print('total point: ', res)
-
     elif request.session['is_pelatih']:
-        print('pelatih')
+        cursor = connection.cursor()
+        cursor.execute("set search_path to babadu;")
+        query = f"""
+            SELECT
+                s.Spesialisasi
+            FROM
+                PELATIH_SPESIALISASI ps
+                JOIN SPESIALISASI s ON ps.ID_Spesialisasi = s.ID
+            WHERE
+                ps.ID_Pelatih = '{request.session['id']}';
+        """
+        cursor.execute(query)
+        res = parse(cursor)
+        spesialisasi = []
+        for s in res:
+            spesialisasi.append(s['spesialisasi'])
+        spesialisasi = ', '.join(spesialisasi)
+        context['spesialisasi'] = spesialisasi
     else:
-        print('umpire')
+        pass
 
     return render(request, 'dashboard.html', context)
