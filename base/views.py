@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
+from django.db import connection
+from base.helper.function import parse
 
 def main(request):
-    # temporary role authorization goes here
-    request.session['email'] = 'john.smith@ristek.cs.ui.ac.id'
-    request.session['is_atlet'] = False
-    request.session['is_pelatih'] = True
-    request.session['is_umpire'] = False
-    if request.session['is_atlet'] or request.session['is_pelatih'] or request.session['is_umpire'] :
+    if 'is_atlet' in request.session or 'is_pelatih' in request.session or 'is_umpire' in request.session:
         return redirect('dashboard:main')
     return render(request, 'index.html')
+
