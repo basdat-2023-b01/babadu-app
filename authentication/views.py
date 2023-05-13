@@ -1,49 +1,18 @@
-import uuid
 import datetime
+import uuid
 from django.shortcuts import render, redirect
-from authentication.forms import *
 from django.db import connection, InternalError
-from base.helper.function import parse
 from django.contrib import messages
-
-SESSION_ROLE_KEYS = {
-    'atlet': 'is_atlet',
-    'pelatih': 'is_pelatih',
-    'umpire': 'is_umpire',
-}
+from base.helper.function import parse
+from authentication.forms import *
+from authentication.constant import *
+from authentication.query import *
 
 def login(request):
     if request.method == 'POST':
         nama = request.POST.get('nama')
         email = request.POST.get('email')
-        query = f"""
-            SELECT
-                m.ID,
-                m.Nama,
-                m.Email,
-                COALESCE(u.ID, p.ID, a.ID) AS Member_ID,
-                CASE
-                    WHEN u.ID IS NOT NULL THEN 'umpire'
-                    WHEN p.ID IS NOT NULL THEN 'pelatih'
-                    WHEN a.ID IS NOT NULL THEN 'atlet'
-                    ELSE 'Unknown'
-                END AS Member_Type,
-                u.Negara,
-                p.Tanggal_Mulai,
-                a.Tgl_Lahir,
-                a.Negara_Asal,
-                a.Play_Right,
-                a.Height,
-                a.World_Rank,
-                a.Jenis_Kelamin
-            FROM
-                MEMBER m
-                LEFT JOIN UMPIRE u ON m.ID = u.ID
-                LEFT JOIN PELATIH p ON m.ID = p.ID
-                LEFT JOIN ATLET a ON m.ID = a.ID
-            WHERE
-                m.nama = '{nama}' and m.email = '{email}';
-        """
+        query = get_user_query(nama, email)
         cursor = connection.cursor()
         cursor.execute("set search_path to babadu;")
         cursor.execute(query)
@@ -88,11 +57,28 @@ def register(request):
         elif 'pelatih_submit' in request.POST:
             pelatih_form = RegisterPelatihForm(request.POST)
             if pelatih_form.is_valid():
-                pass
+                nama = pelatih_form.cleaned_data['nama']
+                email = pelatih_form.cleaned_data['email']
+                kategori = pelatih_form.cleaned_data['kategori']
+                tanggal_mulai = pelatih_form.cleaned_data['tanggal_mulai']
+                payload = pelatih_register(nama, email, kategori, tanggal_mulai)
+                if payload['success']:
+                    return redirect('authentication:login')
+                else:
+                    messages.info(request,payload['msg'])
         elif 'umpire_submit' in request.POST:
             umpire_form = RegisterUmpireForm(request.POST)
             if umpire_form.is_valid():
-                pass
+                print('run 2')
+                nama = umpire_form.cleaned_data['nama']
+                email = umpire_form.cleaned_data['email']
+                negara = umpire_form.cleaned_data['negara']
+                print(nama)
+                payload = umpire_register(nama, email, negara)
+                if payload['success']:
+                    return redirect('authentication:login')
+                else:
+                    messages.info(request,payload['msg'])
     context = {
         'atlet_form': RegisterAtletForm(),
         'pelatih_form': RegisterPelatihForm(),
@@ -105,36 +91,10 @@ def atlet_register(nama, email, negara, tanggal_lahir, play, tinggi_badan, jenis
         id = uuid.uuid4()
         cursor = connection.cursor()
         cursor.execute("set search_path to babadu;")
-        cursor.execute(f"""
-            INSERT INTO
-            MEMBER (id, nama, email)
-                VALUES
-                    (
-                        '{id}',
-                        '{nama}',
-                        '{email}'
-                    );
-        """)
-        cursor.execute(f"""
-            INSERT INTO
-                ATLET (
-                    ID,
-                    Tgl_Lahir,
-                    Negara_Asal,
-                    Play_Right,
-                    Height,
-                    Jenis_Kelamin
-                )
-            VALUES
-                (
-                    '{id}',
-                    '{tanggal_lahir}',
-                    '{negara}',
-                    {play},
-                    {tinggi_badan},
-                    {jenis_kelamin}
-                );
-        """)
+        mem_query = insert_member_query(id, nama, email)
+        cursor.execute(mem_query)
+        atlet_query = insert_atlet_query(id, tanggal_lahir, negara, play, tinggi_badan, jenis_kelamin)
+        cursor.execute(atlet_query)
     except InternalError as e:
         return {
             'success': False,
@@ -144,6 +104,49 @@ def atlet_register(nama, email, negara, tanggal_lahir, play, tinggi_badan, jenis
         return {
             'success': True,
         }
+    
+def pelatih_register(nama, email, kategori, tanggal_mulai):
+    try:
+        id = uuid.uuid4()
+        cursor = connection.cursor()
+        cursor.execute("set search_path to babadu;")
+        mem_query = insert_member_query(id, nama, email)
+        cursor.execute(mem_query)
+        pelaih_qeury = insert_pelatih_query(id, tanggal_mulai)
+        cursor.execute(pelaih_qeury)
+        for k in kategori:
+            print(k)
+            spesialisasi_kategori_query = insert_pelatih_spesialisasi_query(id, k)
+            cursor.execute(spesialisasi_kategori_query)
+    except InternalError as e:
+        return {
+            'success': False,
+            'msg': str(e.args)
+        }
+    else:
+        return {
+            'success': True,
+        }
+
+def umpire_register(nama, email, negara):
+    try:
+        id = uuid.uuid4()
+        cursor = connection.cursor()
+        cursor.execute("set search_path to babadu;")
+        mem_query = insert_member_query(id, nama, email)
+        cursor.execute(mem_query)
+        umpire_query = insert_umpire_query(id, negara)
+        cursor.execute(umpire_query)
+    except InternalError as e:
+        return {
+            'success': False,
+            'msg': str(e.args)
+        }
+    else:
+        return {
+            'success': True,
+        }
+    pass
 
 def logout(request):
     if "id" in request.session:

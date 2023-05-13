@@ -90,7 +90,7 @@ class RegisterPelatihForm(forms.Form):
     )
 
 
-class RegisterUmpireForm(UserCreationForm):
+class RegisterUmpireForm(forms.Form):
     nama = forms.CharField(
         label='nama',
         min_length=5,

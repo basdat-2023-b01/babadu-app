@@ -145,6 +145,7 @@
                 </form>
 
                 <form id="register-form-pelatih" method="POST" action="">
+                    {%csrf_token%}
                     <section id="register-pelatih-field" class="flex flex-col gap-4">
                         <div class="flex flex-col gap-2">
                             <div class="text-white font-semibold">
@@ -182,7 +183,7 @@
                     <section id="auth-login-submit" class="space-y-1 mt-6">
                         <button
                             class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
-                            type="submit" value="Login">
+                            type="submit" value="Login" name="pelatih_submit">
                             Registrasi sebagai Pelatih
                         </button>
                         <div class="grid grid-cols-9 items-center text-shark-400">
@@ -202,6 +203,7 @@
                 </form>
 
                 <form id="register-form-umpire" method="POST" action="">
+                    {%csrf_token%}
                     <section id="register-atlet-field" class="flex flex-col gap-4">
                         <div class="flex flex-col gap-2">
                             <div class="text-white font-semibold">
@@ -231,7 +233,7 @@
                     <section id="auth-login-submit" class="space-y-1 mt-6">
                         <button
                             class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
-                            type="submit" value="Login">
+                            type="submit" value="Login" name="umpire_submit">
                             Registrasi sebagai Umpire
                         </button>
                         <div class="grid grid-cols-9 items-center text-shark-400">
