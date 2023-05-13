@@ -2,8 +2,9 @@ import uuid
 import datetime
 from django.shortcuts import render, redirect
 from authentication.forms import *
-from django.db import connection
+from django.db import connection, InternalError
 from base.helper.function import parse
+from django.contrib import messages
 
 SESSION_ROLE_KEYS = {
     'atlet': 'is_atlet',
@@ -61,18 +62,88 @@ def login(request):
             request.session[SESSION_ROLE_KEYS[mem['member_type']]] = True
             return redirect('/dashboard')     
         else:
-            print('invalid')
+            messages.info(request,'Username atau Password salah')
 
     context = {'login_form': LoginForm()}
     return render(request, 'login.html', context)
 
 def register(request):
+    if request.method == 'POST':
+        if 'atlet_submit' in request.POST:
+            atlet_form = RegisterAtletForm(request.POST)
+            print(atlet_form.errors)
+            if atlet_form.is_valid():
+                nama = atlet_form.cleaned_data['nama']
+                email = atlet_form.cleaned_data['email']
+                negara = atlet_form.cleaned_data['negara']
+                tanggal_lahir = atlet_form.cleaned_data['tanggal_lahir']
+                play = atlet_form.cleaned_data['play']
+                tinggi_badan = atlet_form.cleaned_data['tinggi_badan']
+                jenis_kelamin = atlet_form.cleaned_data['jenis_kelamin']
+                payload = atlet_register(nama, email, negara, tanggal_lahir, play, tinggi_badan, jenis_kelamin)
+                if payload['success']:
+                    return redirect('authentication:login')
+                else:
+                    messages.info(request,payload['msg'])
+        elif 'pelatih_submit' in request.POST:
+            pelatih_form = RegisterPelatihForm(request.POST)
+            if pelatih_form.is_valid():
+                pass
+        elif 'umpire_submit' in request.POST:
+            umpire_form = RegisterUmpireForm(request.POST)
+            if umpire_form.is_valid():
+                pass
     context = {
         'atlet_form': RegisterAtletForm(),
         'pelatih_form': RegisterPelatihForm(),
         'umpire_form': RegisterUmpireForm(),
     }
     return render(request, 'register.html', context)
+
+def atlet_register(nama, email, negara, tanggal_lahir, play, tinggi_badan, jenis_kelamin):
+    try:
+        id = uuid.uuid4()
+        cursor = connection.cursor()
+        cursor.execute("set search_path to babadu;")
+        cursor.execute(f"""
+            INSERT INTO
+            MEMBER (id, nama, email)
+                VALUES
+                    (
+                        '{id}',
+                        '{nama}',
+                        '{email}'
+                    );
+        """)
+        cursor.execute(f"""
+            INSERT INTO
+                ATLET (
+                    ID,
+                    Tgl_Lahir,
+                    Negara_Asal,
+                    Play_Right,
+                    Height,
+                    Jenis_Kelamin
+                )
+            VALUES
+                (
+                    '{id}',
+                    '{tanggal_lahir}',
+                    '{negara}',
+                    {play},
+                    {tinggi_badan},
+                    {jenis_kelamin}
+                );
+        """)
+    except InternalError as e:
+        return {
+            'success': False,
+            'msg': str(e.args)
+        }
+    else:
+        return {
+            'success': True,
+        }
 
 def logout(request):
     if "id" in request.session:
