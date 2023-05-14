@@ -9,7 +9,7 @@ def get_all_atlet_kualifikasi_query():
             A.Play_Right,
             A.Height,
             A.World_Rank,
-            A.Jenis_Kelamin,
+            CASE WHEN A.Jenis_Kelamin THEN 'Laki-laki' ELSE 'Perempuan' END AS Jenis_Kelamin,
             AK.World_Tour_Rank,
             COALESCE(SUM(PH.Total_Point), 0) AS Total_Point
         FROM
@@ -39,7 +39,7 @@ def get_all_atlet_nonkualifikasi_query():
             A.Play_Right,
             A.Height,
             A.World_Rank,
-            A.Jenis_Kelamin
+            CASE WHEN A.Jenis_Kelamin THEN 'Laki-laki' ELSE 'Perempuan' END AS Jenis_Kelamin
         FROM
             MEMBER as M
             INNER JOIN ATLET as A ON A.ID = M.ID
