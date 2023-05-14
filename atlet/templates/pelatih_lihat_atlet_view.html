@@ -45,7 +45,13 @@
                     <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                         <td class="whitespace-nowrap px-6 py-4">{{ atlet.nama }}</td>
                         <td class="whitespace-nowrap px-6 py-4">{{ atlet.email }}</td>
-                        <td class="whitespace-nowrap px-6 py-4">2</td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            {% if atlet.world_rank %}
+                                {{ atlet.world_rank }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
                     </tr>
                     </tr>
                     {% endfor %}

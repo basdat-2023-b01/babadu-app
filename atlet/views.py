@@ -58,8 +58,6 @@ def umpire_daftar_atlet_view(request):
     cursor.execute(query_ganda)
     atlet_ganda = parse(cursor)
 
-    print(atlet_ganda)
-
     context = {
         'atlet_kualifikasi': atlet_kualifikasi,
         'atlet_nonkualifikasi': atlet_nonkualifikasi,

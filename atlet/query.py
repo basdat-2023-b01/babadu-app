@@ -26,7 +26,9 @@ def get_all_atlet_kualifikasi_query():
             A.Height,
             A.World_Rank,
             A.Jenis_Kelamin,
-            AK.World_Tour_Rank;
+            AK.World_Tour_Rank
+        ORDER BY
+            A.World_Rank ASC;
     """
 
 def get_all_atlet_nonkualifikasi_query():
@@ -98,12 +100,14 @@ def get_atlet_dilatih_query(id_pelatih):
     return f"""
         SELECT
             m.email,
-            m.nama
+            m.nama,
+            a.world_rank
         FROM
             ATLET a
             JOIN MEMBER m ON m.ID = a.ID
             JOIN ATLET_PELATIH ap ON ap.ID_Atlet = a.ID
             JOIN PELATIH p ON p.ID = ap.ID_Pelatih
         WHERE
-            p.ID = '{id_pelatih}';
+            p.ID = '{id_pelatih}'
+        ORDER BY a.world_rank ASC;
     """
