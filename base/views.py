@@ -3,7 +3,7 @@ from django.db import connection
 from base.helper.function import parse
 
 def main(request):
-    if request.session['is_atlet'] or request.session['is_pelatih'] or request.session['is_umpire'] :
+    if "id" in request.session:
         return redirect('dashboard:main')
     return render(request, 'index.html')
 
