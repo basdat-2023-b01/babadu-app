@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 
-class LoginForm(UserCreationForm):
+class LoginForm(forms.Form):
     nama = forms.CharField(
         label='nama',
         min_length=5,
@@ -14,14 +14,14 @@ class LoginForm(UserCreationForm):
         attrs={'id': 'login-email', 'placeholder': 'Email'}))
 
 
-class RegisterAtletForm(UserCreationForm):
+class RegisterAtletForm(forms.Form):
     PLAY_CHOICES = [
-        ('1', 'Left'),
-        ('2', 'Right'),
+        (False, 'Left'),
+        (True, 'Right'),
     ]
     KELAMIN_CHOICES = [
-        ('1', 'Laki-laki'),
-        ('2', 'Perempuan'),
+        (True, 'Laki-laki'),
+        (False, 'Perempuan'),
     ]
     nama = forms.CharField(
         label='nama',
@@ -38,6 +38,10 @@ class RegisterAtletForm(UserCreationForm):
         max_length=25,
         widget=forms.TextInput(
             attrs={'id': 'register-atlet-negara', 'placeholder': 'Negara'})
+    )
+    tanggal_lahir = forms.DateField(
+        label='register-pelatih-tanggal-mulai',
+        widget=forms.DateInput(attrs={'type': 'date'})
     )
     play = forms.CharField(
         label='play',
@@ -59,7 +63,7 @@ class RegisterAtletForm(UserCreationForm):
     )
 
 
-class RegisterPelatihForm(UserCreationForm):
+class RegisterPelatihForm(forms.Form):
     KATEGORI_CHOICES = [
         ('tunggal putra', 'tunggal putra'),
         ('tunggal putri', 'tunggal putri'),
@@ -86,7 +90,7 @@ class RegisterPelatihForm(UserCreationForm):
     )
 
 
-class RegisterUmpireForm(UserCreationForm):
+class RegisterUmpireForm(forms.Form):
     nama = forms.CharField(
         label='nama',
         min_length=5,
