@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<section id="authentication" class="h-screen w-full xl:px-20 lg:px-10 sm:px-2 px-4">
+<section id="authentication" class="h-full w-full xl:px-20 lg:px-10 sm:px-2 px-4 py-20 pb-12">
     <div class="h-full flex flex-col gap-8 items-center justify-center text-white">
         <section id="b01" class="w-full">
             <div class="max-w-md mx-auto p-4 border border-shark-400 rounded-lg">
@@ -41,21 +41,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for atlet in list_atlet %}
                     <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">Anthony Sinisuka Ginting</td>
-                        <td class="whitespace-nowrap px-6 py-4">anthony.sukaginting@gmail.com</td>
+                        <td class="whitespace-nowrap px-6 py-4">{{ atlet.nama }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">{{ atlet.email }}</td>
                         <td class="whitespace-nowrap px-6 py-4">2</td>
                     </tr>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">Jonatan Christie</td>
-                        <td class="whitespace-nowrap px-6 py-4">jonathan.christie@gmail.com</td>
-                        <td class="whitespace-nowrap px-6 py-4">6</td>
                     </tr>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">Gregoria Mariska Tunjung</td>
-                        <td class="whitespace-nowrap px-6 py-4">gregoria.maria@gmail.com</td>
-                        <td class="whitespace-nowrap px-6 py-4">10</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </section>

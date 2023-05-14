@@ -63,3 +63,47 @@ def get_all_atlet_ganda_query():
             A1.Nama,
             A2.Nama;
     """
+
+def get_atlet_pelatih_query(id_pelatih):
+    return f"""
+        SELECT
+            A.ID,
+            M.Nama
+        FROM
+            ATLET AS A
+            INNER JOIN MEMBER AS M ON A.ID = M.ID
+        WHERE
+            A.ID NOT IN (
+                SELECT
+                    ID_Atlet
+                FROM
+                    ATLET_PELATIH
+                WHERE
+                    ID_Pelatih = '{id_pelatih}'
+            );
+    """
+
+def insert_atlet_pelatih_query(id_atlet, id_pelatih):
+    return f"""
+        INSERT INTO
+            ATLET_PELATIH (ID_Pelatih, ID_Atlet)
+                VALUES
+                    (
+                        '{id_pelatih}',
+                        '{id_atlet}'
+                    );
+    """
+
+def get_atlet_dilatih_query(id_pelatih):
+    return f"""
+        SELECT
+            m.email,
+            m.nama
+        FROM
+            ATLET a
+            JOIN MEMBER m ON m.ID = a.ID
+            JOIN ATLET_PELATIH ap ON ap.ID_Atlet = a.ID
+            JOIN PELATIH p ON p.ID = ap.ID_Pelatih
+        WHERE
+            p.ID = '{id_pelatih}';
+    """
