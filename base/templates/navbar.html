@@ -34,77 +34,118 @@
                 </div>
                 {% endif %}
                 {% if request.session.is_atlet %}
-                <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'tes-kualifikasi:data-kualifikasi' %}">
-                        <button class="navbar-menu tes-kualifikasi daftar-tes pertanyaan">
-                            Tes Kualifikasi
-                        </button>
-                    </a>
+                <div>
+                    <button class="relative peer hover:text-primary-400">Ujian Kualifikasi</button>
+                    <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'tes-kualifikasi:data-kualifikasi' %}">
+                            <button class="">
+                                List Ujian Kualifikasi
+                            </button>
+                        </a>
+                        <hr class="border-shark-900">
+                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                            <button>
+                                Riwayat Ujian Kualifikasi
+                            </button>
+                        </a>
+                    </div>
                 </div>
-                {% endif %}
-                {% if request.session.is_atlet %}
-                <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'event:daftar' %}">
-                        <button class="navbar-menu daftar">
-                            Daftar Event
-                        </button>
-                    </a>
+                <div>
+                    <button class="relative peer hover:text-primary-400">Event</button>
+                    <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'event:daftar' %}">
+                            <button>
+                                Daftar Event
+                            </button>
+                        </a>
+                        <hr class="border-shark-900">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'event:lihat-enrolled-event' %}">
+                            <button>
+                                Enrolled Event
+                            </button>
+                        </a>
+                    </div>
                 </div>
-                {% endif %}
-                {% if request.session.is_atlet %}
-                <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'event:lihat-enrolled-event' %}">
-                        <button class="navbar-menu enrolled-event">
-                            Enrolled Event
-                        </button>
-                    </a>
-                </div>
-                {% endif %}
-                {% if request.session.is_atlet %}
-                <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'sponsor:daftar' %}">
-                        <button class="navbar-menu daftar-sponsor">
-                            Daftar Sponsor
-                        </button>
-                    </a>
+                <div>
+                    <button class="relative peer hover:text-primary-400">Sponsor</button>
+                    <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'sponsor:daftar' %}">
+                            <button>
+                                Daftar Sponsor
+                            </button>
+                        </a>
+                        <hr class="border-shark-900">
+                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                            <button>
+                                List Sponsor
+                            </button>
+                        </a>
+                    </div>
                 </div>
                 {% endif %}
                 {% if request.session.is_pelatih %}
-                <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'atlet:daftar' %}">
-                        <button class="navbar-menu daftar atlet">
-                            Daftar Atlet
-                        </button>
-                    </a>
-                </div>
-                {% endif %}
-                {% if request.session.is_pelatih %}
-                <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'atlet:lihat' %}">
-                        <button class="navbar-menu list-atlet">
-                            List Atlet
-                        </button>
-                    </a>
-                </div>
-                {% endif %}
-                {% if request.session.is_umpire %}
-                <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'event:lihat' %}">
-                        <button class="navbar-menu event">
-                            Lihat Event
-                        </button>
-                    </a>
+                <div>
+                    <button class="relative peer hover:text-primary-400">Latih Atlet</button>
+                    <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'atlet:daftar' %}">
+                            <button class="">
+                                Create Latih Atlet
+                            </button>
+                        </a>
+                        <hr class="border-shark-900">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'atlet:lihat' %}">
+                            <button>
+                                List Atlet Dilatih
+                            </button>
+                        </a>
+                    </div>
                 </div>
                 {% endif %}
                 {% if request.session.is_umpire %}
-                <div class="cursor-pointer hover:text-primary-400 transition">
-                    <a href="{% url 'hasil-pertandingan:main' %}">
-                        <button class="navbar-menu hasil-pertandingan">
-                            Hasil Pertandingan
-                        </button>
-                    </a>
+                <div>
+                    <button class="relative peer hover:text-primary-400">Latih Atlet</button>
+                    <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'atlet:umpire-daftar-atlet' %}">
+                            <button class="">
+                                Daftar Atlet
+                            </button>
+                        </a>
+                        <hr class="border-shark-900">
+                    </div>
                 </div>
-                {% endif %}
+                <div>
+                    <button class="relative peer hover:text-primary-400">Ujian Kualifikasi</button>
+                    <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
+                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                            <button class="">
+                                Buat Ujian Kualifikasi
+                            </button>
+                        </a>
+                        <hr class="border-shark-900">
+                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                            <button>
+                                List Ujian Kualifikasi
+                            </button>
+                        </a>
+                        <hr class="border-shark-900">
+                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                            <button>
+                                Riwayat Ujian Kualifikasi
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <button class="relative peer hover:text-primary-400">Event</button>
+                    <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
+                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                            <button class="">
+                                Partai Kompetisi
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}   
                 {% if request.session.is_atlet or request.session.is_pelatih or request.session.is_umpire %}
                 <div class="cursor-pointer hover:text-danger transition">
                     <a href="{% url 'authentication:logout' %}" class="navbar-menu">
