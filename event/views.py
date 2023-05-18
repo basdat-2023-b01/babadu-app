@@ -1,10 +1,12 @@
 import datetime
+import uuid
 from event.forms import *
 from django.shortcuts import render, redirect
-from django.db import connection
+from django.db import InternalError, connection
 from event.query import *
 from base.helper.function import parse
 from event.helper import convert_to_slug, convert_to_title
+from event.constant import GANDA_KEYS
 
 def lihat_event_view(request):
     return render(request, 'lihat_event.html')
@@ -52,9 +54,13 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
     event = convert_to_title(event)
 
     context = {}
-
     cursor = connection.cursor()
     cursor.execute("set search_path to babadu;")
+
+    query = get_stadium_detail_query(stadium)
+    cursor.execute(query)
+    res = parse(cursor)[0]
+    context['kapasitas'] = res['kapasitas']
 
     query = get_event_detail(event, tahun, stadium)
     cursor.execute(query)
@@ -69,44 +75,111 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
     query = get_partai_kompetisi_by_event_query(event, tahun)
     cursor.execute(query)
     res = parse(cursor)
-    partai_kompetisi = []
-    for partai in res:
-        partai_kompetisi.append(partai['jenis_partai'])
+    partai_kompetisi = [partai['jenis_partai'] for partai in res]
     context['partai_kompetisi'] = partai_kompetisi
 
-    query = get_other_atlet_kualifikasi_query(request.session['id'])
-    cursor = connection.cursor()
-    cursor.execute("set search_path to babadu;")
+    query = get_other_atlet_kualifikasi_diff_gender_query(request.session['id'], request.session['jenis_kelamin'])
     cursor.execute(query)
     res = parse(cursor)
-    all_atlet = [(all_atlet['id'], all_atlet['nama']) for all_atlet in res] 
-    
+    atlet_difference_gender = [(atlet_difference_gender['id'], atlet_difference_gender['nama']) for atlet_difference_gender in res] 
+
+    query = get_other_atlet_kualifikasi_same_gender_query(request.session['id'], request.session['jenis_kelamin'])
+    cursor.execute(query)
+    res = parse(cursor)
+    atlet_same_gender = [(atlet_same_gender['id'], atlet_same_gender['nama']) for atlet_same_gender in res] 
+
+    query = get_partai_peserta_kompetisi_reg_query(event, tahun)
+    cursor.execute(query)
+    res = parse(cursor)
+    jumlah_pendaftar ={}
+    for partai in res:
+        jumlah_pendaftar[partai['jenis_partai']] = partai['jumlah_pendaftar']
     forms = []
 
     atlet_sex = 'Putra' if request.session['jenis_kelamin'] else 'Putri'
 
     for partai in partai_kompetisi:
-        if 'Ganda' in partai or 'Campuran' in partai:
-            form = GandaPartnerForm(all_atlet, request.POST or None, prefix=convert_to_slug(partai))
-        else:
+        if 'Campuran' in partai:
+            form = GandaPartnerForm(atlet_difference_gender, request.POST or None, prefix=convert_to_slug(partai))
+        elif 'Ganda' in partai:
+            form = GandaPartnerForm(atlet_same_gender, request.POST or None, prefix=convert_to_slug(partai))
+        elif 'Tunggal' in partai:
             form = TunggalForm(request.POST or None, prefix=convert_to_slug(partai))
+        else:
+            continue
 
         if atlet_sex in partai or 'Campuran' in partai:
-            forms.append((partai, form))
-
+            forms.append((partai, form, jumlah_pendaftar[partai]))
 
     context['forms'] = forms
 
     if request.method == 'POST':
+        query = get_world_tour_rank_query(request.session['id'])
+        cursor.execute(query)
+        world_tour_rank = parse(cursor)[0]['world_tour_rank']
         for form in forms:
             if form[0] in request.POST and form[1].is_valid():
-                print('run')
+                if 'Tunggal' in form[0]:
+                    query = insert_peserta_kompetisi_tunggal_query(
+                        request.session['id'],
+                        request.session['world_rank'],
+                        world_tour_rank
+                    )
+                    cursor.execute(query)
+                    nomor_peserta = parse(cursor)[0]['nomor_peserta']
+                    if 'Putra' in form[0]:
+                        try:
+                            query = insert_partai_peserta_kompetisi_query('MS', event, tahun, nomor_peserta)
+                            cursor.execute(query)
+                        except InternalError as e:
+                            print(e)
+                    else:
+                        try:
+                            query = insert_partai_peserta_kompetisi_query('WS', event, tahun, nomor_peserta)
+                            cursor.execute(query)
+                        except InternalError as e:
+                            print(e)
+                else:
+                    id = uuid.uuid4()
+                    id_atlet_2 = form[1].cleaned_data['daftar_atlet']
+                    query = insert_and_get_atlet_ganda(id, request.session['id'], id_atlet_2) 
+                    cursor.execute(query)
+                    query = insert_peserta_kompetisi_ganda_query(
+                        id,
+                        request.session['world_rank'],
+                        world_tour_rank
+                    )
+                    cursor.execute(query)
+                    res = parse(cursor);
+                    nomor_peserta = res[0]['nomor_peserta']
+                    if 'Putra' in form[0]:
+                        try:
+                            query = insert_partai_peserta_kompetisi_query('MD', event, tahun, nomor_peserta)
+                            cursor.execute(query)
+                            cursor.execute(query)
+                            res = parse(cursor)[0];
+                            print(res)
+                        except InternalError as e:
+                            print(e)
+                    elif 'Putri' in form[0]:
+                        try:
+                            query = insert_partai_peserta_kompetisi_query('WD', event, tahun, nomor_peserta)
+                            cursor.execute(query)
+                        except InternalError as e:
+                            print(e)
+                    else:
+                        try:
+                            query = insert_partai_peserta_kompetisi_query('XD', event, tahun, nomor_peserta)
+                            cursor.execute(query)
+                        except InternalError as e:
+                            print(e)
+
+                
 
     return render(request, 'daftar_partai_kompetisi.html', context)
 
 def enrolled_event_view(request):
     return render(request, 'enrolled_event.html')
-
 
 def pertandingan_view(request, id):
     return render(request, 'pertandingan.html')

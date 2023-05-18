@@ -71,6 +71,7 @@
                     <tr>
                         <th scope="col" class="px-6 py-4">Kategori</th>
                         <th scope="col" class="px-6 py-4">Partner</th>
+                        <th scope="col" class="px-6 py-4">Kapasitas</th>
                         <th scope="col" class="px-6 py-4">Opsi</th>
                     </tr>
                 </thead>
@@ -84,12 +85,14 @@
                                 {{ form.1.daftar_atlet }}
                             </td>
                             <td class="whitespace-nowrap px-6 py-4">
+                                {{ form.2 }} / {{ kapasitas }}
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">
                                 <button class="hover:text-primary-500 hover:underline transition" type="submit"
                                     name="{{ form.0 }}">Join</button>
                             </td>
                         </tr>
                     </form>
-
                     {% endfor %}
             </table>
         </section>
