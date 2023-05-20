@@ -234,3 +234,77 @@ def insert_partai_peserta_kompetisi_query(jenis_partai, nama_event, tahun_tahun,
         )
     VALUES ('{jenis_partai}', '{nama_event}', {tahun_tahun}, {nomor_peserta});
     """
+
+def get_enrolled_partai_kompetisi_event(id):
+    return f"""
+        (SELECT
+            pk.nomor_peserta,
+            ppk.jenis_partai,
+            e.*
+        FROM
+            EVENT e
+            JOIN PESERTA_MENDAFTAR_EVENT pme ON e.Nama_Event = pme.Nama_Event
+            AND e.Tahun = pme.Tahun
+            JOIN PESERTA_KOMPETISI pk ON pme.Nomor_Peserta = pk.Nomor_Peserta
+            JOIN PARTAI_PESERTA_KOMPETISI ppk on ppk.nomor_peserta = pk.nomor_peserta 
+                and ppk.nama_event = e.nama_event 
+                and ppk.tahun_event = e.tahun
+            JOIN ATLET_KUALIFIKASI ak ON pk.ID_Atlet_Kualifikasi = ak.ID_Atlet
+        WHERE
+            ak.ID_Atlet = '{id}')
+        UNION
+        (SELECT
+            pk.nomor_peserta,
+            ppk.jenis_partai,
+            e.*
+        FROM
+            EVENT e
+            JOIN PESERTA_MENDAFTAR_EVENT pme ON e.Nama_Event = pme.Nama_Event
+            AND e.Tahun = pme.Tahun
+            JOIN PESERTA_KOMPETISI pk ON pme.Nomor_Peserta = pk.Nomor_Peserta
+            JOIN PARTAI_PESERTA_KOMPETISI ppk on ppk.nomor_peserta = pk.nomor_peserta  
+                and ppk.nama_event = e.nama_event 
+                and ppk.tahun_event = e.tahun
+            JOIN ATLET_GANDA ag ON pk.ID_Atlet_Ganda = ag.ID_Atlet_Ganda
+        WHERE
+            ag.ID_Atlet_Kualifikasi = '{id}'
+            or ag.ID_Atlet_Kualifikasi_2 = '{id}');
+    """
+
+def get_enrolled_event_query(id):
+    return f"""
+        (SELECT
+            pk.Nomor_Peserta,
+            ppk.jenis_partai,
+            e.*
+        FROM
+            EVENT e
+            JOIN PESERTA_MENDAFTAR_EVENT pme ON e.Nama_Event = pme.Nama_Event
+            AND e.Tahun = pme.Tahun
+            JOIN PESERTA_KOMPETISI pk ON pme.Nomor_Peserta = pk.Nomor_Peserta
+            JOIN ATLET_KUALIFIKASI ak ON pk.ID_Atlet_Kualifikasi = ak.ID_Atlet
+        WHERE
+            ak.ID_Atlet = '{id}')
+        UNION
+        (SELECT
+            pk.Nomor_Peserta,
+            ppk.jenis_partai,
+            e.*
+        FROM
+            EVENT e
+            JOIN PESERTA_MENDAFTAR_EVENT pme ON e.Nama_Event = pme.Nama_Event
+            AND e.Tahun = pme.Tahun
+            JOIN PESERTA_KOMPETISI pk ON pme.Nomor_Peserta = pk.Nomor_Peserta
+            JOIN ATLET_GANDA ag ON pk.ID_Atlet_Ganda = ag.ID_Atlet_Ganda
+        WHERE
+            ag.ID_Atlet_Kualifikasi = '{id}'
+            or ag.ID_Atlet_Kualifikasi_2 = '{id}');
+    """
+
+def unenroll_event_query(nomor_peserta, nama_event, tahun_event):
+    return f"""
+        DELETE FROM PESERTA_MENDAFTAR_EVENT
+            WHERE nomor_peserta = {nomor_peserta}
+            AND nama_event = '{nama_event}'
+            AND tahun = {tahun_event};
+    """

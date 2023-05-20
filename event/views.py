@@ -178,8 +178,41 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
 
     return render(request, 'daftar_partai_kompetisi.html', context)
 
+def enrolled_partai_kompetisi_event_view(request):
+    cursor = connection.cursor()
+    cursor.execute("set search_path to babadu;")
+    query = get_enrolled_partai_kompetisi_event(request.session['id'])
+    cursor.execute(query)
+    res = parse(cursor)
+    print(res)
+    for i in res:
+        print(i)
+        print()
+    context = {'events': res}
+    return render(request, 'enrolled_partai_kompetisi_event.html', context)
+
 def enrolled_event_view(request):
-    return render(request, 'enrolled_event.html')
+    cursor = connection.cursor()
+    cursor.execute("set search_path to babadu;")
+    query = get_enrolled_event_query(request.session['id'])
+    cursor.execute(query)
+    res = parse(cursor)
+    events = []
+    for event in res:
+        form = UnenrollEventForm(request.POST or None, prefix=convert_to_slug(''))
+        events.append((event, form))
+
+    if request.method == 'POST':
+        for event in events:
+            if f"{event[0]['nama_event']}-{event[0]['tahun']}" in request.POST and event[1].is_valid():
+                try:
+                    print(event[0])
+                    query = unenroll_event_query()
+                except InternalError as e:
+                    print(e)
+
+    context = {'events': events}
+    return render(request, 'enrolled_event.html', context)
 
 def pertandingan_view(request, id):
     return render(request, 'pertandingan.html')

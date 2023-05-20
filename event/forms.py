@@ -26,3 +26,6 @@ class GandaPartnerForm(forms.Form):
 
 class TunggalForm(forms.Form):
     pass
+
+class UnenrollEventForm(forms.Form):
+    pass

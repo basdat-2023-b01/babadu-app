@@ -41,29 +41,22 @@
                         <th scope="col" class="px-6 py-4">Tahun</th>
                         <th scope="col" class="px-6 py-4">Stadium</th>
                         <th scope="col" class="px-6 py-4">Kategori Superseries</th>
+                        <th scope="col" class="px-6 py-4">Jenis Partai</th>
                         <th scope="col" class="px-6 py-4">Tanggal Mulai</th>
                         <th scope="col" class="px-6 py-4">Tanggal Selesai</th>
-                        <th scope="col" class="px-6 py-4">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for event in events %}
-                    <form method="POST">
-                        {% csrf_token %}
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.0.nama_event }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.0.tahun }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.0.nama_stadium }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.0.kategori_superseries }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.0.tgl_mulai }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.0.tgl_mulai }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.0.tgl_selesai }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">
-                                <button class="hover:text-primary-500 hover:underline transition" type="submit"
-                                    name="{{ event.0.nama_event }}-{{ event.0.tahun }}">Unenroll</button>
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.nama_event }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.tahun }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.nama_stadium }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.kategori_superseries }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.jenis_partai }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.tgl_mulai }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.tgl_selesai }}</td>
                         </tr>
-                    </form>
                     {% endfor %}
                 </tbody>
             </table>
