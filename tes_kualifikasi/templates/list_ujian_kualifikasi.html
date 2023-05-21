@@ -55,7 +55,7 @@
                             <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tanggal }}</td>
                             {% if request.session.is_atlet %}
                                 <td class="whitespace-nowrap px-6 py-4">
-                                    <a href = "{{ ujian_kualifikasi.tahun }}/{{ ujian_kualifikasi.batch }}/{{ ujian_kualifikasi.tempat }}/{{ ujian_kualifikasi.tanggal }}" class="hover:text-primary-500 hover:underline transition">
+                                    <a href = "{{ ujian_kualifikasi.tahun }}/{{ ujian_kualifikasi.batch }}/{{ ujian_kualifikasi.tempat_url }}/{{ ujian_kualifikasi.tanggal_url }}" class="hover:text-primary-500 hover:underline transition">
                                         Ikuti
                                     </a>
                                 </td>

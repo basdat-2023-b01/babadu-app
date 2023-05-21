@@ -26,6 +26,48 @@
                 </div>
             </div>
         </section>
+        <section class="pt-4 border border-shark-400 rounded-lg overflow-hidden flex flex-col w-full">
+            <section class="space-y-2">
+                <div class="text-xl text-center font-semibold pb-2 text-primary-500">
+                    RIWAYAT UJIAN KUALIFIKASI
+                </div>
+                <hr class="border-shark-400">
+            </section>
+            <table class="min-w-full text-sm font-light text-center" id="tabel-ujian-kualifikasi">
+                <thead class="border-b font-medium border-shark-400">
+                    <tr>
+                        {% if request.session.is_umpire %}
+                            <th scope="col" class="px-6 py-4">Nama Atlet</th>
+                        {% endif %}
+                        <th scope="col" class="px-6 py-4">Tahun</th>
+                        <th scope="col" class="px-6 py-4">Batch</th>
+                        <th scope="col" class="px-6 py-4">Tempat Pelaksanaan</th>
+                        <th scope="col" class="px-6 py-4">Tanggal Pelaksanaan</th>
+                        <th scope="col" class="px-6 py-4">Hasil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if riwayat_ujian_kualifikasi %}
+                        {% for ujian_kualifikasi in riwayat_ujian_kualifikasi %}
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            {% if request.session.is_umpire %}
+                                <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.nama }}</td>
+                            {% endif %}
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tahun }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.batch }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tempat }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tanggal }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.hasil_lulus }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400 text-center">
+                        <td colspan="6" class="text-center p-4">Tidak ada Riwayat Ujian Kualifikasi</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </section>
     </div>
 </section>
 

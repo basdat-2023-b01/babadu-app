@@ -149,7 +149,6 @@ def umpire_register(nama, email, negara):
         return {
             'success': True,
         }
-    pass
 
 def logout(request):
     if "id" in request.session:

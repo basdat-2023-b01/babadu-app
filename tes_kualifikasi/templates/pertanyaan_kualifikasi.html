@@ -79,6 +79,13 @@
                         </div>
                     </div>
                 </section>
+                <div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <h1 class="text-sm text-danger">{{ message }}</h1>
+                        {% endfor %}
+                    {% endif %}
+                </div>
                 <hr class="border-shark-400">
                 <section id="auth-login-submit" class="space-y-1 px-4">
                     <button
@@ -91,5 +98,9 @@
         </div>
     </div>
 </section>
+
+<script>
+
+</script>
 
 {% endblock content %}
