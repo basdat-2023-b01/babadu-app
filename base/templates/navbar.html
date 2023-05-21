@@ -75,13 +75,13 @@
                 <div>
                     <button class="relative peer hover:text-primary-400">Sponsor</button>
                     <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
-                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'sponsor:daftar' %}">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'sponsor:daftar-sponsor' %}">
                             <button>
                                 Daftar Sponsor
                             </button>
                         </a>
                         <hr class="border-shark-900">
-                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'sponsor:list-sponsor' %}">
                             <button>
                                 List Sponsor
                             </button>

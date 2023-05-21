@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
 from tes_kualifikasi.forms import *
 from tes_kualifikasi.query import *
-from django.db import connection
+from django.db import connection, InternalError
 from base.helper.function import parse
 from tes_kualifikasi.helper import *
-from django.db import connection, InternalError
 from django.contrib import messages
 import datetime
 
