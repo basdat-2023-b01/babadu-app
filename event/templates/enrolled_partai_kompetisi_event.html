@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block meta %}
-<title>Babadu | Daftar Event</title>
+<title>Babadu | Enrollled Event Partai Kompetisi</title>
 {% endblock meta %}
 
 {% block content %}
@@ -30,31 +30,33 @@
             class="pt-4 border border-shark-400 rounded-lg overflow-hidden flex flex-col w-full">
             <section class="space-y-2">
                 <div class="text-xl text-center font-semibold pb-2 text-primary-500">
-                    DAFTAR EVENT
+                    ENROLLED EVENT
                 </div>
                 <hr class="border-shark-400">
             </section>
             <table class="min-w-full text-sm font-light text-center">
                 <thead class="border-b font-medium border-shark-400">
                     <tr>
-                        <th scope="col" class="px-6 py-4">Nama Stadium</th>
-                        <th scope="col" class="px-6 py-4">Negara</th>
-                        <th scope="col" class="px-6 py-4">Kapasitas</th>
-                        <th scope="col" class="px-6 py-4">Opsi</th>
+                        <th scope="col" class="px-6 py-4">Nama Event</th>
+                        <th scope="col" class="px-6 py-4">Tahun</th>
+                        <th scope="col" class="px-6 py-4">Stadium</th>
+                        <th scope="col" class="px-6 py-4">Kategori Superseries</th>
+                        <th scope="col" class="px-6 py-4">Jenis Partai</th>
+                        <th scope="col" class="px-6 py-4">Tanggal Mulai</th>
+                        <th scope="col" class="px-6 py-4">Tanggal Selesai</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for stadium in list_stadium %}
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">{{ stadium.nama }}</td>
-                        <td class="whitespace-nowrap px-6 py-4">{{ stadium.negara }}</td>
-                        <td class="whitespace-nowrap px-6 py-4">{{ stadium.kapasitas }}</td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <a href="{{ stadium.url }}" class="hover:text-primary-500 hover:underline transition">
-                                Pilih
-                            </a>
-                        </td>
-                    </tr>
+                    {% for event in events %}
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.nama_event }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.tahun }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.nama_stadium }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.kategori_superseries }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.jenis_partai }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.tgl_mulai }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.tgl_selesai }}</td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
