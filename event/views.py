@@ -2,7 +2,7 @@ import datetime
 import uuid
 from event.forms import *
 from django.shortcuts import render, redirect
-from django.db import InternalError, connection
+from django.db import InternalError, IntegrityError, connection
 from event.query import *
 from base.helper.function import parse
 from event.helper import convert_to_slug, convert_to_title
@@ -119,62 +119,53 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
         world_tour_rank = parse(cursor)[0]['world_tour_rank']
         for form in forms:
             if form[0] in request.POST and form[1].is_valid():
-                if 'Tunggal' in form[0]:
-                    query = insert_peserta_kompetisi_tunggal_query(
-                        request.session['id'],
-                        request.session['world_rank'],
-                        world_tour_rank
-                    )
-                    cursor.execute(query)
-                    nomor_peserta = parse(cursor)[0]['nomor_peserta']
-                    if 'Putra' in form[0]:
-                        try:
+                try:
+                    if 'Tunggal' in form[0]:
+                        query = insert_peserta_kompetisi_tunggal_query(
+                            request.session['id'],
+                            request.session['world_rank'],
+                            world_tour_rank
+                        )
+                        cursor.execute(query)
+                        nomor_peserta = parse(cursor)[0]['nomor_peserta']
+                        if 'Putra' in form[0]:
                             query = insert_partai_peserta_kompetisi_query('MS', event, tahun, nomor_peserta)
                             cursor.execute(query)
-                        except InternalError as e:
-                            print(e)
-                    else:
-                        try:
+                        
+                        else:
                             query = insert_partai_peserta_kompetisi_query('WS', event, tahun, nomor_peserta)
                             cursor.execute(query)
-                        except InternalError as e:
-                            print(e)
-                else:
-                    id = uuid.uuid4()
-                    id_atlet_2 = form[1].cleaned_data['daftar_atlet']
-                    query = insert_and_get_atlet_ganda(id, request.session['id'], id_atlet_2) 
-                    cursor.execute(query)
-                    query = insert_peserta_kompetisi_ganda_query(
-                        id,
-                        request.session['world_rank'],
-                        world_tour_rank
-                    )
-                    cursor.execute(query)
-                    res = parse(cursor);
-                    nomor_peserta = res[0]['nomor_peserta']
-                    if 'Putra' in form[0]:
-                        try:
+                        
+                    else:
+                        id = uuid.uuid4()
+                        id_atlet_2 = form[1].cleaned_data['daftar_atlet']
+                        query = insert_and_get_atlet_ganda(id, request.session['id'], id_atlet_2) 
+                        cursor.execute(query)
+                        query = insert_peserta_kompetisi_ganda_query(
+                            id,
+                            request.session['world_rank'],
+                            world_tour_rank
+                        )
+                        cursor.execute(query)
+                        res = parse(cursor);
+                        nomor_peserta = res[0]['nomor_peserta']
+                        if 'Putra' in form[0]:
                             query = insert_partai_peserta_kompetisi_query('MD', event, tahun, nomor_peserta)
                             cursor.execute(query)
                             cursor.execute(query)
                             res = parse(cursor)[0];
-                            print(res)
-                        except InternalError as e:
-                            print(e)
-                    elif 'Putri' in form[0]:
-                        try:
+                
+                        elif 'Putri' in form[0]:
                             query = insert_partai_peserta_kompetisi_query('WD', event, tahun, nomor_peserta)
                             cursor.execute(query)
-                        except InternalError as e:
-                            print(e)
-                    else:
-                        try:
+                        
+                        else:
                             query = insert_partai_peserta_kompetisi_query('XD', event, tahun, nomor_peserta)
                             cursor.execute(query)
-                        except InternalError as e:
-                            print(e)
-
-                
+                except InternalError as e:
+                    print(e)
+                except IntegrityError as e:
+                    print(e)
 
     return render(request, 'daftar_partai_kompetisi.html', context)
 
