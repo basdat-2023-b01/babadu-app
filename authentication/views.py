@@ -17,6 +17,9 @@ def login(request):
         cursor.execute("set search_path to babadu;")
         cursor.execute(query)
         res = parse(cursor)
+        request.session['is_atlet'] = False
+        request.session['is_pelatih'] = False
+        request.session['is_umpire'] = False
         if len(res) == 1:
             mem = res[0]
             for attr in mem:

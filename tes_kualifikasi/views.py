@@ -1,14 +1,109 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from tes_kualifikasi.forms import *
+from tes_kualifikasi.query import *
+from django.db import connection
+from base.helper.function import parse
+from tes_kualifikasi.helper import *
+from django.db import connection, InternalError
+from django.contrib import messages
 
-def data_kualifikasi_view(request):
+def buat_ujian_kualifikasi_view(request):
+    if "id" not in request.session or not request.session['is_umpire']:
+        return redirect('main:main')
+    
+    cursor = connection.cursor()
+    form = BuatUjianKualifikasi()
+    
+    if request.method == 'POST' and 'buat_ujian_kualifikasi_submit' in request.POST:
+        tahun = request.POST.get('tahun')
+        batch = request.POST.get('batch')
+        tempat_pelaksanaan = request.POST.get('tempat_pelaksanaan')
+        tanggal_pelaksanaan = request.POST.get('tanggal_pelaksanaan')
+        query = insert_ujian_kualifikasi_query(tahun, batch, tempat_pelaksanaan, tanggal_pelaksanaan)
+        cursor.execute("set search_path to babadu;")
+        cursor.execute(query)
+        return redirect('tes-kualifikasi:umpire-list-ujian-kualifikasi')
+    
     context = {
-        'data_kualifikasi_form': DataKualifikasiForm(),
+        'buat_ujian_kualifikasi': form,
     }
-    return render(request, 'data_kualifikasi.html', context)
 
-def pertanyaan_kualifikasi_view(request):
+    return render(request, 'buat_ujian_kualifikasi.html', context)
+
+def umpire_list_ujian_kualifikasi_view(request):
+    if "id" not in request.session or not request.session['is_umpire']:
+        return redirect('main:main')
+    
+    query = get_list_ujian_kualifikasi_query()
+    cursor = connection.cursor()
+    cursor.execute("set search_path to babadu;")
+    cursor.execute(query)
+    res = parse(cursor)
+    context = {'list_ujian_kualifikasi': res}
+    return render(request, 'list_ujian_kualifikasi.html', context)
+
+def atlet_list_ujian_kualifikasi_view(request):
+    if "id" not in request.session or not request.session['is_atlet']:
+        return redirect('main:main')
+    
+    query = get_list_ujian_kualifikasi_query()
+    cursor = connection.cursor()
+    cursor.execute("set search_path to babadu;")
+    cursor.execute(query)
+    res = parse(cursor)
+    context = {'list_ujian_kualifikasi': res}
+    return render(request, 'list_ujian_kualifikasi.html', context)
+
+def pertanyaan_kualifikasi_view(request, tahun, batch, tempat, tanggal):
+    if "id" not in request.session or not request.session['is_atlet']:
+        return redirect('main:main')
+
+    tempat = convert_to_slug(tempat)
+    tanggal = convert_to_slug(tanggal)
+
+    cursor = connection.cursor()
+    cursor.execute("set search_path to babadu;")
+    form = PertanyaanKualifikasiForm()
+    
+    if request.method == 'POST' and 'pertanyaan_kualifikasi_submit' in request.POST:
+        nomor_satu = request.POST.get('nomor_satu')
+        nomor_dua = request.POST.get('nomor_dua')
+        nomor_tiga = request.POST.get('nomor_tiga')
+        nomor_empat = request.POST.get('nomor_empat')
+        nomor_lima = request.POST.get('nomor_lima')
+        hasil_ujian = int(nomor_satu) + int(nomor_dua) + int(nomor_tiga) + int(nomor_empat) + int(nomor_lima)
+        hasil_lulus = False
+        if hasil_ujian >= 80:
+            hasil_lulus = True
+        payload = insert_atlet_nonkualifikasi_ujian_kualifikasi_view(request.session['id'], tahun, batch, tempat, tanggal, hasil_lulus)
+        if payload['success']:
+            return redirect('tes-kualifikasi:atlet-riwayat-ujian-kualifikasi')
+        else:
+            messages.info(request,payload['msg'])
+    
     context = {
-        'pertanyaan_kualifikasi_form': PertanyaanKualifikasiForm(),
+        'pertanyaan_kualifikasi': form,
     }
+
     return render(request, 'pertanyaan_kualifikasi.html', context)
+
+def insert_atlet_nonkualifikasi_ujian_kualifikasi_view(id_atlet, tahun, batch, tempat, tanggal, hasil_lulus):
+    try:
+        cursor = connection.cursor()
+        cursor.execute("set search_path to babadu;")
+        query = insert_atlet_nonkualifikasi_ujian_kualifikasi_query(id_atlet, tahun, batch, tempat, tanggal, hasil_lulus)
+        cursor.execute(query)
+    except InternalError as e:
+        return {
+            'success': False,
+            'msg': str(e.args)
+        }
+    else:
+        return {
+            'success': True,
+        }
+
+#def umpire_riwayat_ujian_kualifikasi_view(request):
+
+def atlet_riwayat_ujian_kualifikasi_view(request):
+    return render(request, 'riwayat_ujian_kualifikasi.html')
