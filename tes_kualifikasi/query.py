@@ -75,6 +75,11 @@ def stored_procedure_ujian_kualifikasi_query():
                     tanggal = NEW.tanggal)
                 THEN 
                     RAISE EXCEPTION 'error';
+                ELSIF EXISTS
+                    (SELECT * FROM ATLET_KUALIFIKASI
+                    WHERE id_atlet = NEW.id_atlet)
+                THEN 
+                    RAISE EXCEPTION 'error';
                 END IF; 
                 RETURN NEW;
             END;

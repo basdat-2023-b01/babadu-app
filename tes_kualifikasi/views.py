@@ -91,7 +91,7 @@ def pertanyaan_kualifikasi_view(request, tahun, batch, tempat, tanggal):
         if payload['success']:
             return redirect('tes-kualifikasi:atlet-riwayat-ujian-kualifikasi')
         else:
-            messages.info(request, 'Anda sudah pernah mengikuti ujian kualifikasi ini.')
+            messages.info(request, 'Anda tidak dapat mengikuti ujian kualifikasi ini.')
     
     context = {
         'pertanyaan_kualifikasi': form,
