@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'authentication',
     'event',
     'hasil_pertandingan',
+    'pertandingan',
     'dashboard',
     'tes_kualifikasi',
     'atlet',
