@@ -47,7 +47,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for event in events %}
+                    {% if events %}
+                        {% for event in events %}
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                             <td class="whitespace-nowrap px-6 py-4">{{ event.nama_event }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ event.tahun }}</td>
@@ -57,7 +58,12 @@
                             <td class="whitespace-nowrap px-6 py-4">{{ event.tgl_mulai }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ event.tgl_selesai }}</td>
                         </tr>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                    <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400 text-center">
+                        <td colspan="7" class="text-center p-4">No Partai Kompetisi Enrolled</td>
+                    </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </section>

@@ -165,6 +165,8 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
                 except IntegrityError as e:
                     print(e)
                     raise Exception(e)
+                else:
+                    return redirect(request.META['HTTP_REFERER'])
 
     return render(request, 'daftar_partai_kompetisi.html', context)
 
@@ -202,6 +204,8 @@ def enrolled_event_view(request):
                         cursor.execute(query)
                 except InternalError as e:
                     print(e)
+                else:
+                    return redirect(request.META['HTTP_REFERER'])
 
     context = {'events': events}
     return render(request, 'enrolled_event.html', context)
