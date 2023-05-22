@@ -204,6 +204,7 @@ def enrolled_event_view(request):
                         cursor.execute(query)
                 except InternalError as e:
                     print(e)
+                    raise Exception(e)
                 else:
                     return redirect(request.META['HTTP_REFERER'])
 
