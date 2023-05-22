@@ -81,7 +81,7 @@ def get_partai_peserta_kompetisi_reg_query(event, tahun):
         GROUP BY PK.jenis_partai;
     """
 
-def get_other_atlet_kualifikasi_diff_gender_query(id, jenis_kelamin):
+def get_other_atlet_kualifikasi_diff_gender_query(id, jenis_kelamin, event, tahun):
     return f"""
         SELECT
             *
@@ -92,20 +92,31 @@ def get_other_atlet_kualifikasi_diff_gender_query(id, jenis_kelamin):
         WHERE
             AK.ID_Atlet != '{id}' and A.Jenis_Kelamin != {jenis_kelamin}
             AND AK.ID_Atlet NOT IN (
-                SELECT
-                    AG.ID_Atlet_Kualifikasi
-                FROM
-                    ATLET_GANDA as AG
-            )
-            AND AK.ID_Atlet NOT IN (
-                SELECT
-                    AG.ID_Atlet_Kualifikasi_2
-                FROM
-                    ATLET_GANDA as AG
+            (SELECT
+                ag.ID_Atlet_Kualifikasi
+            FROM
+                PESERTA_KOMPETISI pk
+                JOIN ATLET_GANDA ag ON pk.ID_Atlet_Ganda = AG.ID_Atlet_Ganda
+                JOIN PARTAI_PESERTA_KOMPETISI ppk ON pk.Nomor_Peserta = ppk.Nomor_Peserta
+            WHERE
+                ag.ID_Atlet_Kualifikasi_2 = '{id}'
+                AND ppk.nama_event = '{event}'
+                AND ppk.tahun_event = {tahun})
+            UNION
+            (SELECT
+                ag.ID_Atlet_Kualifikasi_2
+            FROM
+                PESERTA_KOMPETISI pk
+                JOIN ATLET_GANDA ag ON pk.ID_Atlet_Ganda = AG.ID_Atlet_Ganda
+                JOIN PARTAI_PESERTA_KOMPETISI ppk ON pk.Nomor_Peserta = ppk.Nomor_Peserta
+            WHERE
+                ag.ID_Atlet_Kualifikasi = '{id}'
+                AND ppk.nama_event = '{event}'
+                AND ppk.tahun_event = {tahun})
             );
     """
 
-def get_other_atlet_kualifikasi_same_gender_query(id, jenis_kelamin):
+def get_other_atlet_kualifikasi_same_gender_query(id, jenis_kelamin, event, tahun):
     return f"""
         SELECT
             *
@@ -116,16 +127,28 @@ def get_other_atlet_kualifikasi_same_gender_query(id, jenis_kelamin):
         WHERE
             AK.ID_Atlet != '{id}' and A.Jenis_Kelamin = {jenis_kelamin}
             AND AK.ID_Atlet NOT IN (
-                SELECT
-                    AG.ID_Atlet_Kualifikasi
-                FROM
-                    ATLET_GANDA as AG
-            )
-            AND AK.ID_Atlet NOT IN (
-                SELECT
-                    AG.ID_Atlet_Kualifikasi_2
-                FROM
-                    ATLET_GANDA as AG
+            (SELECT
+                ag.ID_Atlet_Kualifikasi
+            FROM
+                PESERTA_KOMPETISI pk
+                JOIN ATLET_GANDA ag ON pk.ID_Atlet_Ganda = AG.ID_Atlet_Ganda
+                JOIN PARTAI_PESERTA_KOMPETISI ppk ON pk.Nomor_Peserta = ppk.Nomor_Peserta
+            WHERE
+                ag.ID_Atlet_Kualifikasi_2 = '{id}'
+                AND ppk.nama_event = '{event}'
+                AND ppk.tahun_event = {tahun})
+            UNION
+            (SELECT
+                ag.ID_Atlet_Kualifikasi_2
+            FROM
+                PESERTA_KOMPETISI pk
+                JOIN ATLET_GANDA ag ON pk.ID_Atlet_Ganda = AG.ID_Atlet_Ganda
+                JOIN PARTAI_PESERTA_KOMPETISI ppk ON pk.Nomor_Peserta = ppk.Nomor_Peserta
+            WHERE
+                ag.ID_Atlet_Kualifikasi = '{id}'
+                AND ppk.nama_event = '{event}'
+                AND ppk.tahun_event = {tahun}
+                )
             );
     """
 
@@ -275,8 +298,6 @@ def get_enrolled_event_query(id):
     return f"""
        (
             SELECT
-                pk.nomor_peserta,
-                ppk.jenis_partai,
                 e.*
             FROM
                 EVENT e
@@ -293,8 +314,6 @@ def get_enrolled_event_query(id):
         UNION
         (
             SELECT
-                pk.nomor_peserta,
-                ppk.jenis_partai,
                 e.*
             FROM
                 EVENT e
@@ -309,6 +328,40 @@ def get_enrolled_event_query(id):
                 ag.ID_Atlet_Kualifikasi = '{id}'
                 or ag.ID_Atlet_Kualifikasi_2 = '{id}'
         );
+    """
+def get_partai_peserta_kompetisi_by_event_query(id_atlet, event, tahun):
+    return f"""
+    (SELECT
+    pk.Nomor_Peserta
+    FROM
+        PESERTA_KOMPETISI pk
+        JOIN PARTAI_PESERTA_KOMPETISI ppk ON pk.Nomor_Peserta = ppk.Nomor_Peserta
+        WHERE pk.ID_Atlet_Kualifikasi = '{id_atlet}'
+        AND ppk.nama_event = '{event}'
+        AND ppk.tahun_event = {tahun}
+    )
+    UNION
+    (SELECT
+        pk.Nomor_Peserta
+    FROM
+        PESERTA_KOMPETISI pk
+        JOIN ATLET_GANDA ag ON pk.ID_Atlet_Ganda = AG.ID_Atlet_Ganda
+        JOIN PARTAI_PESERTA_KOMPETISI ppk ON pk.Nomor_Peserta = ppk.Nomor_Peserta
+    WHERE
+        ag.ID_Atlet_Kualifikasi_2 = '{id_atlet}'
+        AND ppk.nama_event = '{event}'
+        AND ppk.tahun_event = {tahun})
+    UNION
+    (SELECT
+        pk.Nomor_Peserta
+    FROM
+        PESERTA_KOMPETISI pk
+        JOIN ATLET_GANDA ag ON pk.ID_Atlet_Ganda = AG.ID_Atlet_Ganda
+        JOIN PARTAI_PESERTA_KOMPETISI ppk ON pk.Nomor_Peserta = ppk.Nomor_Peserta
+    WHERE
+        ag.ID_Atlet_Kualifikasi = '{id_atlet}'
+        AND ppk.nama_event = '{event}'
+        AND ppk.tahun_event = {tahun});
     """
 
 def unenroll_event_query(nomor_peserta, nama_event, tahun_event):
