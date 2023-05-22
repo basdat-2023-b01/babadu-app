@@ -37,13 +37,13 @@
                 <div>
                     <button class="relative peer hover:text-primary-400">Ujian Kualifikasi</button>
                     <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
-                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'tes-kualifikasi:data-kualifikasi' %}">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'tes-kualifikasi:atlet-list-ujian-kualifikasi' %}">
                             <button class="">
                                 List Ujian Kualifikasi
                             </button>
                         </a>
                         <hr class="border-shark-900">
-                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'tes-kualifikasi:atlet-riwayat-ujian-kualifikasi' %}">
                             <button>
                                 Riwayat Ujian Kualifikasi
                             </button>
@@ -75,13 +75,13 @@
                 <div>
                     <button class="relative peer hover:text-primary-400">Sponsor</button>
                     <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
-                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'sponsor:daftar' %}">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'sponsor:daftar-sponsor' %}">
                             <button>
                                 Daftar Sponsor
                             </button>
                         </a>
                         <hr class="border-shark-900">
-                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'sponsor:list-sponsor' %}">
                             <button>
                                 List Sponsor
                             </button>
@@ -122,19 +122,19 @@
                 <div>
                     <button class="relative peer hover:text-primary-400">Ujian Kualifikasi</button>
                     <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
-                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'tes-kualifikasi:buat-ujian-kualifikasi' %}">
                             <button class="">
                                 Buat Ujian Kualifikasi
                             </button>
                         </a>
                         <hr class="border-shark-900">
-                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'tes-kualifikasi:umpire-list-ujian-kualifikasi' %}">
                             <button>
                                 List Ujian Kualifikasi
                             </button>
                         </a>
                         <hr class="border-shark-900">
-                        <a class="px-5 py-3 hover:text-primary-400" href="">
+                        <a class="px-5 py-3 hover:text-primary-400" href="{% url 'tes-kualifikasi:umpire-riwayat-ujian-kualifikasi' %}">
                             <button>
                                 Riwayat Ujian Kualifikasi
                             </button>

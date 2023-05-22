@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filter %}
+
+{% block meta %}
+<title>Babadu | Tes Kualifikasi</title>
+{% endblock meta %}
+
+{% block content %}
+
+<section id="authentication" class="h-screen w-full xl:px-20 lg:px-10 sm:px-2 px-4">
+    <div class="h-full flex flex-col gap-8 items-center justify-center text-white">
+        <section id="b01" class="w-full">
+            <div class="max-w-md mx-auto p-4 border border-shark-400 rounded-lg">
+                <div class="flex flex-row items-center justify-start gap-4">
+                    <div class="font-semibold text-lg p-4 bg-primary-500 rounded-md">
+                        B01
+                    </div>
+                    <div class="text-start text-shark-400">
+                        <a href="/">
+                            <span
+                                class="text-white font-semibold hover:text-primary-500 transition cursor-pointer">Babadu.b01</span>
+                        </a>
+                        dibuat untuk memenuhi tugas kelompok pada mata kuliah Basis Data.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pt-4 border border-shark-400 rounded-lg overflow-hidden flex flex-col w-full">
+            <section class="space-y-2">
+                <div class="text-xl text-center font-semibold pb-2 text-primary-500">
+                    RIWAYAT UJIAN KUALIFIKASI
+                </div>
+                <hr class="border-shark-400">
+            </section>
+            <table class="min-w-full text-sm font-light text-center" id="tabel-ujian-kualifikasi">
+                <thead class="border-b font-medium border-shark-400">
+                    <tr>
+                        {% if request.session.is_umpire %}
+                            <th scope="col" class="px-6 py-4">Nama Atlet</th>
+                        {% endif %}
+                        <th scope="col" class="px-6 py-4">Tahun</th>
+                        <th scope="col" class="px-6 py-4">Batch</th>
+                        <th scope="col" class="px-6 py-4">Tempat Pelaksanaan</th>
+                        <th scope="col" class="px-6 py-4">Tanggal Pelaksanaan</th>
+                        <th scope="col" class="px-6 py-4">Hasil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if riwayat_ujian_kualifikasi %}
+                        {% for ujian_kualifikasi in riwayat_ujian_kualifikasi %}
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            {% if request.session.is_umpire %}
+                                <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.nama }}</td>
+                            {% endif %}
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tahun }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.batch }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tempat }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tanggal }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.hasil_lulus }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400 text-center">
+                        <td colspan="6" class="text-center p-4">Tidak ada Riwayat Ujian Kualifikasi</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+</section>
+
+{% endblock content %}
+            
