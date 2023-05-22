@@ -174,10 +174,6 @@ def enrolled_partai_kompetisi_event_view(request):
     query = get_enrolled_partai_kompetisi_event(request.session['id'])
     cursor.execute(query)
     res = parse(cursor)
-    print(res)
-    for i in res:
-        print(i)
-        print()
     context = {'events': res}
     return render(request, 'enrolled_partai_kompetisi_event.html', context)
 
@@ -203,7 +199,6 @@ def enrolled_event_view(request):
                     nomor_peserta = [no['nomor_peserta'] for no in res]
                     for nomor in nomor_peserta:
                         query = unenroll_event_query(nomor, event_detail['nama_event'], event_detail['tahun'])
-                        print(query)
                         cursor.execute(query)
                 except InternalError as e:
                     print(e)
