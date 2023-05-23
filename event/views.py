@@ -1,4 +1,5 @@
 import datetime
+import re
 import uuid
 from event.forms import *
 from django.shortcuts import render, redirect
@@ -6,6 +7,7 @@ from django.db import InternalError, IntegrityError, connection
 from event.query import *
 from base.helper.function import parse
 from event.helper import convert_to_slug, convert_to_title
+from django.contrib import messages
 
 def lihat_event_view(request):
     return render(request, 'lihat_event.html')
@@ -129,12 +131,9 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
                         nomor_peserta = parse(cursor)[0]['nomor_peserta']
                         if 'Putra' in form[0]:
                             query = insert_partai_peserta_kompetisi_query('MS', event, tahun, nomor_peserta)
-                            cursor.execute(query)
-                        
                         else:
                             query = insert_partai_peserta_kompetisi_query('WS', event, tahun, nomor_peserta)
-                            cursor.execute(query)
-                        
+                        cursor.execute(query)
                     else:
                         id = uuid.uuid4()
                         id_atlet_2 = form[1].cleaned_data['daftar_atlet']
@@ -155,16 +154,13 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
                         elif 'Putri' in form[0]:
                             query = insert_partai_peserta_kompetisi_query('WD', event, tahun, nomor_peserta)
                             cursor.execute(query)
-                        
                         else:
                             query = insert_partai_peserta_kompetisi_query('XD', event, tahun, nomor_peserta)
-                            cursor.execute(query)
-                except InternalError as e:
-                    print(e)
-                    raise Exception(e)
-                except IntegrityError as e:
-                    print(e)
-                    raise Exception(e)
+                        cursor.execute(query)
+                except Exception as e:
+                    trimmed_string = re.sub(r'\(|\)|\'', '', str(e.args))
+                    message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
+                    messages.info(request, message)
                 else:
                     return redirect(request.META['HTTP_REFERER'])
 
