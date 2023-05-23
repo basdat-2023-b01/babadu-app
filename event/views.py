@@ -6,7 +6,6 @@ from django.db import InternalError, IntegrityError, connection
 from event.query import *
 from base.helper.function import parse
 from event.helper import convert_to_slug, convert_to_title
-from event.constant import GANDA_KEYS
 
 def lihat_event_view(request):
     return render(request, 'lihat_event.html')
@@ -78,12 +77,12 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
     partai_kompetisi = [partai['jenis_partai'] for partai in res]
     context['partai_kompetisi'] = partai_kompetisi
 
-    query = get_other_atlet_kualifikasi_diff_gender_query(request.session['id'], request.session['jenis_kelamin'])
+    query = get_other_atlet_kualifikasi_diff_gender_query(request.session['id'], request.session['jenis_kelamin'], event, tahun)
     cursor.execute(query)
     res = parse(cursor)
     atlet_difference_gender = [(atlet_difference_gender['id'], atlet_difference_gender['nama']) for atlet_difference_gender in res] 
 
-    query = get_other_atlet_kualifikasi_same_gender_query(request.session['id'], request.session['jenis_kelamin'])
+    query = get_other_atlet_kualifikasi_same_gender_query(request.session['id'], request.session['jenis_kelamin'], event, tahun)
     cursor.execute(query)
     res = parse(cursor)
     atlet_same_gender = [(atlet_same_gender['id'], atlet_same_gender['nama']) for atlet_same_gender in res] 
@@ -141,8 +140,9 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
                         id_atlet_2 = form[1].cleaned_data['daftar_atlet']
                         query = insert_and_get_atlet_ganda(id, request.session['id'], id_atlet_2) 
                         cursor.execute(query)
+                        id_atlet_ganda = parse(cursor)[0]['id_atlet_ganda']
                         query = insert_peserta_kompetisi_ganda_query(
-                            id,
+                            id_atlet_ganda,
                             request.session['world_rank'],
                             world_tour_rank
                         )
@@ -152,9 +152,6 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
                         if 'Putra' in form[0]:
                             query = insert_partai_peserta_kompetisi_query('MD', event, tahun, nomor_peserta)
                             cursor.execute(query)
-                            cursor.execute(query)
-                            res = parse(cursor)[0];
-                
                         elif 'Putri' in form[0]:
                             query = insert_partai_peserta_kompetisi_query('WD', event, tahun, nomor_peserta)
                             cursor.execute(query)
@@ -164,8 +161,12 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
                             cursor.execute(query)
                 except InternalError as e:
                     print(e)
+                    raise Exception(e)
                 except IntegrityError as e:
                     print(e)
+                    raise Exception(e)
+                else:
+                    return redirect(request.META['HTTP_REFERER'])
 
     return render(request, 'daftar_partai_kompetisi.html', context)
 
@@ -175,10 +176,6 @@ def enrolled_partai_kompetisi_event_view(request):
     query = get_enrolled_partai_kompetisi_event(request.session['id'])
     cursor.execute(query)
     res = parse(cursor)
-    print(res)
-    for i in res:
-        print(i)
-        print()
     context = {'events': res}
     return render(request, 'enrolled_partai_kompetisi_event.html', context)
 
@@ -197,10 +194,19 @@ def enrolled_event_view(request):
         for event in events:
             if f"{event[0]['nama_event']}-{event[0]['tahun']}" in request.POST and event[1].is_valid():
                 try:
-                    print(event[0])
-                    query = unenroll_event_query()
+                    event_detail = event[0]
+                    query = get_partai_peserta_kompetisi_by_event_query(request.session['id'], event_detail['nama_event'], event_detail['tahun'])
+                    cursor.execute(query)
+                    res = parse(cursor)
+                    nomor_peserta = [no['nomor_peserta'] for no in res]
+                    for nomor in nomor_peserta:
+                        query = unenroll_event_query(nomor, event_detail['nama_event'], event_detail['tahun'])
+                        cursor.execute(query)
                 except InternalError as e:
                     print(e)
+                    raise Exception(e)
+                else:
+                    return redirect(request.META['HTTP_REFERER'])
 
     context = {'events': events}
     return render(request, 'enrolled_event.html', context)
