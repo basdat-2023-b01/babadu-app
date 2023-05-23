@@ -1,4 +1,5 @@
 import datetime
+import re
 import uuid
 from django.shortcuts import render, redirect
 from django.db import connection, InternalError
@@ -56,7 +57,9 @@ def register(request):
                 if payload['success']:
                     return redirect('authentication:login')
                 else:
-                    messages.info(request,payload['msg'])
+                    trimmed_string = re.sub(r'\(|\)|\'', '', payload['msg'])
+                    message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
+                    messages.info(request, message)
         elif 'pelatih_submit' in request.POST:
             pelatih_form = RegisterPelatihForm(request.POST)
             if pelatih_form.is_valid():
@@ -68,7 +71,9 @@ def register(request):
                 if payload['success']:
                     return redirect('authentication:login')
                 else:
-                    messages.info(request,payload['msg'])
+                    trimmed_string = re.sub(r'\(|\)|\'', '', payload['msg'])
+                    message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
+                    messages.info(request, message)
         elif 'umpire_submit' in request.POST:
             umpire_form = RegisterUmpireForm(request.POST)
             if umpire_form.is_valid():
@@ -81,7 +86,9 @@ def register(request):
                 if payload['success']:
                     return redirect('authentication:login')
                 else:
-                    messages.info(request,payload['msg'])
+                    trimmed_string = re.sub(r'\(|\)|\'', '', payload['msg'])
+                    message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
+                    messages.info(request, message)
     context = {
         'atlet_form': RegisterAtletForm(),
         'pelatih_form': RegisterPelatihForm(),
