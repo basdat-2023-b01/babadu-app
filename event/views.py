@@ -10,11 +10,13 @@ from event.helper import convert_to_slug, convert_to_title
 from django.contrib import messages
 
 def lihat_event_view(request):
+    if "id" not in request.session or not request.session['is_atlet']:
+        return redirect('main:main')
     return render(request, 'lihat_event.html')
 
 def daftar_stadium_view(request):
-    if "id" not in request.session:
-        return redirect('authentication:login')
+    if "id" not in request.session or not request.session['is_atlet']:
+        return redirect('main:main')
     cursor = connection.cursor()
     cursor.execute("set search_path to babadu;")
     query = get_stadium_query()
@@ -29,6 +31,8 @@ def daftar_stadium_view(request):
     return render(request, 'daftar_stadium.html', context)
 
 def daftar_event_view(request, stadium):
+    if "id" not in request.session or not request.session['is_atlet']:
+        return redirect('main:main')
     stadium = convert_to_title(stadium)
     cursor = connection.cursor()
     cursor.execute("set search_path to babadu;")
@@ -51,6 +55,8 @@ def daftar_event_view(request, stadium):
 
 
 def daftar_partai_kompetisi(request, stadium, event, tahun):
+    if "id" not in request.session or not request.session['is_atlet']:
+        return redirect('main:main')
     stadium = convert_to_title(stadium)
     event = convert_to_title(event)
 
@@ -167,6 +173,8 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
     return render(request, 'daftar_partai_kompetisi.html', context)
 
 def enrolled_partai_kompetisi_event_view(request):
+    if "id" not in request.session or not request.session['is_atlet']:
+        return redirect('main:main')
     cursor = connection.cursor()
     cursor.execute("set search_path to babadu;")
     query = get_enrolled_partai_kompetisi_event(request.session['id'])
@@ -176,6 +184,8 @@ def enrolled_partai_kompetisi_event_view(request):
     return render(request, 'enrolled_partai_kompetisi_event.html', context)
 
 def enrolled_event_view(request):
+    if "id" not in request.session or not request.session['is_atlet']:
+        return redirect('main:main')
     cursor = connection.cursor()
     cursor.execute("set search_path to babadu;")
     query = get_enrolled_event_query(request.session['id'])
@@ -206,6 +216,3 @@ def enrolled_event_view(request):
 
     context = {'events': events}
     return render(request, 'enrolled_event.html', context)
-
-def pertandingan_view(request, id):
-    return render(request, 'pertandingan.html')
