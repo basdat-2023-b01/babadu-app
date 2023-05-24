@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<section id="authentication-login" class="h-screen w-full xl:px-20 lg:px-10 sm:px-2 px-4 py-16 text-white">
+<section id="authentication-login" class="h-full w-full xl:px-20 lg:px-10 sm:px-2 px-4 py-16 text-white">
     <div class="h-full flex flex-col items-center justify-center mt-4">
         <section id="b01" class="w-full">
             <div class="max-w-md mx-auto p-4 border border-shark-400 rounded-lg">
@@ -56,6 +56,7 @@
                 </section>
 
                 <form id="register-form-atlet" method="POST" action="" class="flex flex-col gap-4">
+                    {%csrf_token%}
                     <section id="register-atlet-field" class="flex flex-col gap-4">
                         <div class="flex flex-col gap-2">
                             <div class="text-white font-semibold">
@@ -72,6 +73,13 @@
                             <div>
                                 {{atlet_form.email | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
                             </div>
+                            <div>
+                                {% if messages %}
+                                {% for message in messages %}
+                                <h1 class="text-sm text-danger">{{ message }}</h1>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
                         </div>
                         <div class="flex flex-col gap-2">
                             <div class="text-white font-semibold">
@@ -79,6 +87,14 @@
                             </div>
                             <div>
                                 {{atlet_form.negara | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="text-white font-semibold">
+                                Tanggal Lahir
+                            </div>
+                            <div>
+                                {{atlet_form.tanggal_lahir | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
                             </div>
                         </div>
                         <div class="flex flex-col gap-2">
@@ -106,10 +122,10 @@
                             </div>
                         </div>
                     </section>
-                    <section id="auth-login-submit" class="space-y-1 mt-2">
+                    <section id="atlet-button-submit" class="space-y-1 mt-2">
                         <button
                             class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
-                            type="submit" value="Login">
+                            type="submit" name="atlet_submit">
                             Registrasi sebagai Atlet
                         </button>
                         <div class="grid grid-cols-9 items-center text-shark-400">
@@ -129,6 +145,7 @@
                 </form>
 
                 <form id="register-form-pelatih" method="POST" action="">
+                    {%csrf_token%}
                     <section id="register-pelatih-field" class="flex flex-col gap-4">
                         <div class="flex flex-col gap-2">
                             <div class="text-white font-semibold">
@@ -144,14 +161,6 @@
                             </div>
                             <div>
                                {{pelatih_form.email | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <div class="text-white font-semibold">
-                                Negara
-                            </div>
-                            <div>
-                                {{pelatih_form.negara | addclass:"w-full px-4 py-2 border border-shark-500 bg-transparent outline-none focus:border-primary-400 rounded-md transition text-white"}}
                             </div>
                         </div>
                         <div class="flex flex-col gap-2">
@@ -174,7 +183,7 @@
                     <section id="auth-login-submit" class="space-y-1 mt-6">
                         <button
                             class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
-                            type="submit" value="Login">
+                            type="submit" value="Login" name="pelatih_submit">
                             Registrasi sebagai Pelatih
                         </button>
                         <div class="grid grid-cols-9 items-center text-shark-400">
@@ -194,6 +203,7 @@
                 </form>
 
                 <form id="register-form-umpire" method="POST" action="">
+                    {%csrf_token%}
                     <section id="register-atlet-field" class="flex flex-col gap-4">
                         <div class="flex flex-col gap-2">
                             <div class="text-white font-semibold">
@@ -223,7 +233,7 @@
                     <section id="auth-login-submit" class="space-y-1 mt-6">
                         <button
                             class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
-                            type="submit" value="Login">
+                            type="submit" value="Login" name="umpire_submit">
                             Registrasi sebagai Umpire
                         </button>
                         <div class="grid grid-cols-9 items-center text-shark-400">

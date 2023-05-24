@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Babadu | Event Pertandingan</title>
+{% endblock meta %}
+
+{% block content %}
+
+<section id="authentication" class="h-full w-full xl:px-20 lg:px-10 sm:px-2 px-4 py-28">
+    <div class="h-full flex flex-col gap-8 items-center justify-center text-white">
+        <section id="b01" class="w-full">
+            <div class="max-w-md mx-auto p-4 border border-shark-400 rounded-lg">
+                <div class="flex flex-row items-center justify-start gap-4">
+                    <div class="font-semibold text-lg p-4 bg-primary-500 rounded-md">
+                        B01
+                    </div>
+                    <div class="text-start text-shark-400">
+                        <a href="/">
+                            <span
+                                class="text-white font-semibold hover:text-primary-500 transition cursor-pointer">Babadu.b01</span>
+                        </a>
+                        dibuat untuk memenuhi tugas kelompok pada mata kuliah Basis Data.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-4 border border-shark-400 rounded-lg flex flex-col w-full">
+            <section class="space-y-2">
+                <div class="text-xl text-center font-semibold">
+                    PERTANDINGAN PEREMPAT FINAL
+                </div>
+                <div class="text-md text-center text-primary-400">
+                    [ 00:00 ]
+                </div>
+                <hr class="border-shark-400">
+            </section>
+            <table class="min-w-full text-sm font-light text-center">
+                <thead class="border-b font-medium dark:border-neutral-500">
+                    <tr>
+                        <th scope="col" class="px-6 py-4">Tim 1</th>
+                        <th scope="col" class="px-6 py-4">Tim 2</th>
+                        <th scope="col" class="px-6 py-4">Skor Tim 1</th>
+                        <th scope="col" class="px-6 py-4">Skor Tim 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                        <td class="whitespace-nowrap px-6 py-4">A</td>
+                        <td class="whitespace-nowrap px-6 py-4">B</td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
+                                <div class="text-white">1</div>
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
+                            </div>
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
+                                <div class="text-white">4</div>
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                        <td class="whitespace-nowrap px-6 py-4">C</td>
+                        <td class="whitespace-nowrap px-6 py-4">D</td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
+                                <div class="text-white">8</div>
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
+                            </div>
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
+                                <div class="text-white">4</div>
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                        <td class="whitespace-nowrap px-6 py-4">E</td>
+                        <td class="whitespace-nowrap px-6 py-4">F</td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
+                                <div class="text-white">0</div>
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
+                            </div>
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
+                                <div class="text-white">7</div>
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                        <td class="whitespace-nowrap px-6 py-4">G</td>
+                        <td class="whitespace-nowrap px-6 py-4">H</td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
+                                <div class="text-white">4</div>
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
+                            </div>
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
+                                <div class="text-white">5</div>
+                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <section class="px-4">
+                <button
+                    class="bg-primary-500 w-full py-2 mt-4 mr-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
+                    type="submit" value="Login">
+                    NEXT
+                </button>
+            </section>
+        </section>
+    </div>
+</section>
+
+{% endblock content %}

@@ -39,47 +39,29 @@
                         <th scope="col" class="px-6 py-4">Total Hadiah</th>
                         <th scope="col" class="px-6 py-4">Tanggal Mulai</th>
                         <th scope="col" class="px-6 py-4">Kategori</th>
-                        <th scope="col" class="px-6 py-4">Kapasitas</th>
-                        <th scope="col" class="px-6 py-4">Opsi</th>
+                        <th scope="col" class="px-6 py-4">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">Event A</td>
-                        <td class="whitespace-nowrap px-6 py-4">Rp 7.000.000</td>
-                        <td class="whitespace-nowrap px-6 py-4">01-05-2023</td>
-                        <td class="whitespace-nowrap px-6 py-4">S11</td>
-                        <td class="whitespace-nowrap px-6 py-4">50/64</td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <a href="kategori/d92f105e-7b0f-43af-ae63-e2ee1d7c9b57" class="hover:text-primary-500 hover:underline transition">
-                                Pilih
-                            </a>
-                        </td>
+                    {% if list_event %}
+                        {% for event in list_event %}
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.nama_event }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.total_hadiah }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.tgl_mulai }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ event.kategori_superseries }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                <a href="{{ event.url }}" class="hover:text-primary-500 hover:underline transition">
+                                    Pilih
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400 text-center">
+                        <td colspan="6" class="text-center p-4">No Event</td>
                     </tr>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">Event B</td>
-                        <td class="whitespace-nowrap px-6 py-4">Rp 9.000.000</td>
-                        <td class="whitespace-nowrap px-6 py-4">27-07-2023</td>
-                        <td class="whitespace-nowrap px-6 py-4">S1</td>
-                        <td class="whitespace-nowrap px-6 py-4">50/70</td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <a href="kategori/d92f105e-7b0f-43af-ae63-e2ee1d7c9b57" class="hover:text-primary-500 hover:underline transition">
-                                Pilih
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">Event C</td>
-                        <td class="whitespace-nowrap px-6 py-4">Rp 14.000.000</td>
-                        <td class="whitespace-nowrap px-6 py-4">22-11-2023</td>
-                        <td class="whitespace-nowrap px-6 py-4">S13</td>
-                        <td class="whitespace-nowrap px-6 py-4">40/80</td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <a href="kategori/d92f105e-7b0f-43af-ae63-e2ee1d7c9b57" class="hover:text-primary-500 hover:underline transition">
-                                Pilih
-                            </a>
-                        </td>
-                    </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </section>
