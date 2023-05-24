@@ -20,6 +20,7 @@ def daftar_atlet_view(request):
     if request.method == 'POST' and 'daftar_atlet_submit' in request.POST and form.is_valid():
         id_atlet = form.cleaned_data['daftar_atlet']
         query = insert_atlet_pelatih_query(id_atlet, request.session['id'])
+        print(query)
         cursor.execute("set search_path to babadu;")
         cursor.execute(query)
         return redirect('atlet:lihat')

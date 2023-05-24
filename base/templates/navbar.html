@@ -34,6 +34,7 @@
                 </div>
                 {% endif %}
                 {% if request.session.is_atlet %}
+                {% if not request.session.is_terkualifikasi %}
                 <div>
                     <button class="relative peer hover:text-primary-400">Ujian Kualifikasi</button>
                     <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
@@ -50,6 +51,7 @@
                         </a>
                     </div>
                 </div>
+                {% endif %}
                 <div>
                     <button class="relative peer hover:text-primary-400">Event</button>
                     <div class="absolute hidden peer-hover:flex hover:flex flex-col bg-midnight border border-shark-900 rounded-lg">
