@@ -3,7 +3,7 @@ import re
 import uuid
 from event.forms import *
 from django.shortcuts import render, redirect
-from django.db import InternalError, connection
+from django.db import InternalError, IntegrityError, connection
 from event.query import *
 from base.helper.function import parse
 from event.helper import convert_to_slug, convert_to_title
@@ -162,10 +162,12 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
                         else:
                             query = insert_partai_peserta_kompetisi_query('XD', event, tahun, nomor_peserta)
                         cursor.execute(query)
-                except Exception as e:
+                except InternalError as e:
                     trimmed_string = re.sub(r'\(|\)|\'', '', str(e.args))
                     message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
                     messages.info(request, message)
+                except IntegrityError as e:
+                    pass
                 else:
                     return redirect(request.META['HTTP_REFERER'])
 
