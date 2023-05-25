@@ -6,7 +6,7 @@
 
 <Script>
     // Skor
-    // var counters = {};
+    var counters = {};
 
     function incrementCount(counterId) {
         var counterElement = document.getElementById(counterId + '+input');
@@ -126,7 +126,7 @@
                 formData['pertandingan'][counter]['tim'].push({'id': counterId, 'score': counterValue})
             });
             counter++;
-        } else console.log("gaada R32");
+        } else console.log("TIDAK ADA R32");
         if (R16.length > 0) {
             formData['pertandingan'].push({'jenisBabak': 'R16',
                 'tim': []});
@@ -137,7 +137,7 @@
                 formData['pertandingan'][counter]['tim'].push({'id': counterId, 'score': counterValue})
             });
             counter++;
-        } else console.log("gaada R16");
+        } else console.log("TIDAK ADA R16");
         if (PF.length > 0) {
             formData['pertandingan'].push({'jenisBabak': 'PEREMPATFINAL',
                 'tim': []});
@@ -148,7 +148,7 @@
                 formData['pertandingan'][counter]['tim'].push({'id': counterId, 'score': counterValue})
             });
             counter++;
-        } else console.log("gaada PEREMPAT FINAL");
+        } else console.log("TIDAK ADA PEREMPAT FINAL");
         if (SF.length > 0) {
             formData['pertandingan'].push({'jenisBabak': 'SEMIFINAL',
                 'tim': []});
@@ -159,7 +159,7 @@
                 formData['pertandingan'][counter]['tim'].push({'id': counterId, 'score': counterValue})
             });
             counter++;
-        } else console.log("gaada SEMIFINAL");
+        } else console.log("TIDAK ADA SEMIFINAL");
         if (J3.length > 0) {
             formData['pertandingan'].push({'jenisBabak': 'Juara 3',
                 'tim': []});
@@ -170,7 +170,7 @@
                 formData['pertandingan'][counter]['tim'].push({'id': counterId, 'score': counterValue})
             });
             counter++;
-        } else console.log("gaada JUARA 3");
+        } else console.log("TIDAK ADA JUARA 3");
         if (F.length > 0) {
             formData['pertandingan'].push({'jenisBabak': 'FINAL',
                 'tim': []});
@@ -181,8 +181,8 @@
                 formData['pertandingan'][counter]['tim'].push({'id': counterId, 'score': counterValue})
             });
             counter++;
-        } else console.log("gaada FINAL");
-        // console.log(formData);
+        } else console.log("TIDAK ADA FINAL");
+
         $.ajax({
             type: 'POST',
             url: `/pertandingan/berlangsung/${tahun}/${event}/`,
@@ -237,6 +237,7 @@
             </div>
         </section>
         <section class="py-4 border border-shark-400 rounded-lg flex flex-col w-full">
+        {% for data in pertandingan %}
             <section class="space-y-2">
                 <div class="text-xl text-center font-semibold">
                     PERTANDINGAN PEREMPAT FINAL
@@ -264,24 +265,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for tim in data.tim %}
+                    {% for tim in peserta_kompetisi %}
                     <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <!-- <td class="whitespace-nowrap px-6 py-4">A</td>
-                        <td class="whitespace-nowrap px-6 py-4">B</td> -->
-                        <!-- <td class="whitespace-nowrap px-6 py-4">
-                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
-                                <div class="text-white">1</div>
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
-                            </div>
-                        </td> -->
-                        <!-- <td class="whitespace-nowrap px-6 py-4">
-                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
-                                <div class="text-white">4</div>
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
-                            </div>
-                        </td> -->
                         <td class="whitespace-nowrap px-6 py-4" id="{{ tim.0.id }}-counter" name="counter">
                             {{tim.0.nama}}
                             <div>
@@ -311,6 +296,7 @@
                     NEXT
                 </button>
             </section>
+        {% endfor %}
         </section>
     </div>
 </section>

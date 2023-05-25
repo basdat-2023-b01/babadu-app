@@ -55,13 +55,13 @@ def pertandingan_view(request, event, tahun, jenis_partai, jenis_babak):
     partai = "CD"
     umpire = '0d331503-8696-47cb-9fc5-59d450a781ec'
 
-    cursor.execute("SELECT * FROM partai_peserta_kompetisi WHERE nama_event = %s and jenis_partai = %s and tahun_event = %s", [event, partai, tahun])
+    cursor.execute("SELECT * FROM PARTAI_PESERTA_KOMPETISI WHERE Nama_Event = %s and Jenis_Partai = %s and Tahun_Event = %s", [event, partai, tahun])
 
     nomer_peserta_kompetisi = cursor.fetchall()
     peserta_kompetisi = []
 
     for n in nomer_peserta_kompetisi:
-        cursor.execute("select * from peserta_kompetisi where nomor_peserta = %s", [n[3]])
+        cursor.execute("select * from PESERTA_KOMPETISI where Nomor_Peserta = %s", [n[3]])
         peserta_kompetisi.append(cursor.fetchall())
 
     peserta_tunggal = []
@@ -69,17 +69,17 @@ def pertandingan_view(request, event, tahun, jenis_partai, jenis_babak):
 
     for n in peserta_kompetisi:
         if n[0][1] == None:
-            cursor.execute("select * from member where id = %s", [n[0][2]])
+            cursor.execute("select * from MEMBER where ID = %s", [n[0][2]])
             tunggal = cursor.fetchall()
             peserta_tunggal.append([tunggal[0][0], tunggal [0][1]])
         else:
-            cursor.execute("select * from atlet_ganda where \n"
-                            "id_atlet_ganda = %s", [n[0][1]])
+            cursor.execute("select * from ATLET_GANDA where \n"
+                            "ID_Atlet_Ganda = %s", [n[0][1]])
             ganda = cursor.fetchall()
 
-            cursor.execute("select * from member where id = %s", [ganda[0][1]])
+            cursor.execute("select * from MEMBER where ID = %s", [ganda[0][1]])
             atlet1 = cursor.fetchall()
-            cursor.execute("select * from member where id = %s", [ganda[0][2]])
+            cursor.execute("select * from MEMBER where ID = %s", [ganda[0][2]])
             atlet2 = cursor.fetchall()
 
             peserta_ganda.append([ganda[0][0], atlet1[0][0], atlet1[0][1], atlet2[0][0], atlet2[0][1]])
