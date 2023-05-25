@@ -4,5 +4,6 @@ from sponsor.views import *
 app_name = 'sponsor'
 
 urlpatterns = [
-    path('daftar/', daftar_sponsor_view, name='daftar'),
-]
+    path('daftar-sponsor/', daftar_sponsor_view, name='daftar-sponsor'),
+    path('list-sponsor/', list_sponsor_view, name='list-sponsor'),
+] 

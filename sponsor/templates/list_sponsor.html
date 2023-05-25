@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filter %}
 
 {% block meta %}
-<title>Babadu | Lihat Atlet</title>
+<title>Babadu | Daftar Atlet</title>
 {% endblock meta %}
 
 {% block content %}
@@ -28,34 +29,32 @@
         <section class="pt-4 border border-shark-400 rounded-lg overflow-hidden flex flex-col w-full">
             <section class="space-y-2">
                 <div class="text-xl text-center font-semibold pb-2 text-primary-500">
-                    LIST ATLET
+                    LIST SPONSOR
                 </div>
                 <hr class="border-shark-400">
             </section>
-            <table class="min-w-full text-sm font-light text-center">
+            <table class="min-w-full text-sm font-light text-center" id="tabel-ujian-kualifikasi">
                 <thead class="border-b font-medium border-shark-400">
                     <tr>
-                        <th scope="col" class="px-6 py-4">Nama Atlet</th>
-                        <th scope="col" class="px-6 py-4">Email</th>
-                        <th scope="col" class="px-6 py-4">World Rank</th>
+                        <th scope="col" class="px-6 py-4">Nama Sponsor</th>
+                        <th scope="col" class="px-6 py-4">Tanggal Mulai</th>
+                        <th scope="col" class="px-6 py-4">Tanggal Selesai</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">Anthony Sinisuka Ginting</td>
-                        <td class="whitespace-nowrap px-6 py-4">anthony.sukaginting@gmail.com</td>
-                        <td class="whitespace-nowrap px-6 py-4">2</td>
+                    {% if list_sponsor %}
+                        {% for sponsor in list_sponsor %}
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">{{ sponsor.nama_brand }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ sponsor.tgl_mulai }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ sponsor.tgl_selesai }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400 text-center">
+                        <td colspan="6" class="text-center p-4">Tidak ada Sponsor</td>
                     </tr>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">Jonatan Christie</td>
-                        <td class="whitespace-nowrap px-6 py-4">jonathan.christie@gmail.com</td>
-                        <td class="whitespace-nowrap px-6 py-4">6</td>
-                    </tr>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">Gregoria Mariska Tunjung</td>
-                        <td class="whitespace-nowrap px-6 py-4">gregoria.maria@gmail.com</td>
-                        <td class="whitespace-nowrap px-6 py-4">10</td>
-                    </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </section>

@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filter %}
+
+{% block meta %}
+<title>Babadu | Daftar Event</title>
+{% endblock meta %}
+
+{% block content %}
+
+<section id="authentication" class="h-full w-full xl:px-20 lg:px-10 sm:px-2 px-4 py-20 pb-12">
+    <div class="h-full flex flex-col gap-8 items-center justify-center text-white">
+        <section id="b01" class="w-full">
+            <div class="max-w-md mx-auto p-4 border border-shark-400 rounded-lg">
+                <div class="flex flex-row items-center justify-start gap-4">
+                    <div class="font-semibold text-lg p-4 bg-primary-500 rounded-md">
+                        B01
+                    </div>
+                    <div class="text-start text-shark-400">
+                        <a href="/">
+                            <span
+                                class="text-white font-semibold hover:text-primary-500 transition cursor-pointer">Babadu.b01</span>
+                        </a>
+                        dibuat untuk memenuhi tugas kelompok pada mata kuliah Basis Data.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pt-4 border border-shark-400 rounded-lg overflow-hidden flex flex-col w-full">
+            <section class="space-y-2">
+                <div class="text-xl text-center font-semibold pb-2 text-primary-500">
+                    PILIH KATEGORI
+                </div>
+                <hr class="border-shark-400">
+                <section>
+                    <table class="min-w-full text-sm font-light my-4">
+                        <tbody>
+                            <tr class="border-none">
+                                <td class="whitespace-nowrap px-6 py-4">Event</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ nama_event }}</td>
+                            </tr>
+                            <tr class="border-none">
+                                <td class="whitespace-nowrap px-6 py-4">Hadiah</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ total_hadiah }}</td>
+                            </tr>
+                            <tr class="border-none">
+                                <td class="whitespace-nowrap px-6 py-4">Tanggal Mulai</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ tgl_mulai }}</td>
+                            </tr>
+                            <tr class="border-none">
+                                <td class="whitespace-nowrap px-6 py-4">Tanggal Selesai</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ tgl_selesai }}</td>
+                            </tr>
+                            <tr class="border-none">
+                                <td class="whitespace-nowrap px-6 py-4">Kategori</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ kategori_superseries }}</td>
+                            </tr>
+                            <tr class="border-none">
+                                <td class="whitespace-nowrap px-6 py-4">Kapasitas</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ kapasitas }}</td>
+                            </tr>
+                            <tr class="border-none">
+                                <td class="whitespace-nowrap px-6 py-4">Stadium</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ nama_stadium }}</td>
+                            </tr>
+                            <tr class="border-none">
+                                <td class="whitespace-nowrap px-6 py-4">Negara</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ negara }}</td>
+                            </tr>
+                    </table>
+                </section>
+            </section>
+            <table class="min-w-full text-sm font-light text-center">
+                <thead class="border font-medium border-shark-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-4">Kategori</th>
+                        <th scope="col" class="px-6 py-4">Partner</th>
+                        <th scope="col" class="px-6 py-4">Kapasitas</th>
+                        <th scope="col" class="px-6 py-4">Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for form in forms %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
+                            <td class="whitespace-nowrap px-6 py-4">{{ form.0 }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                {{ form.1.daftar_atlet }}
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                {{ form.2 }} / {{ kapasitas }}
+                            </td>
+                            {% if form.2 < kapasitas %}
+                            <td class="whitespace-nowrap px-6 py-4">
+                                <button class="hover:text-primary-500 hover:underline transition" type="submit"
+                                    name="{{ form.0 }}">Join</button>
+                            </td>
+                            {% else %}
+                            <td class="whitespace-nowrap px-6 py-4">
+                                <h1>Sudah Penuh</h1>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    </form>
+                    {% endfor %}
+            </table>
+        </section>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    <section class="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">
+        <div class="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
+            <div class="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-midnight outline-none focus:outline-none">
+                <div class="px-8 py-12 flex flex-col gap-4">
+                    <div class="text-2xl text-center text-white font-semibold">
+                        Registrasi Partai Kompetisi Gagal
+                    </div>
+                    <hr class="border-shark-400 w-full">
+                    <div class="text-center text-danger">
+                        {{ message }}
+                    </div>
+                    <hr class="border-shark-400 border w-full">
+                    <div>
+                        <h1 class="text-shark-200 text-base text-center">
+                            Ingin mencoba mendaftar partai kompetisi lainnya?
+                            <a class="text-primary-400 hover:underline transition"
+                                href="javascript:window.location.href=window.location.href">
+                                daftar partai lainnya
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    {% endif %}
+</section>
+
+{% endblock content %}

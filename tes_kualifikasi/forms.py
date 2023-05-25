@@ -1,45 +1,34 @@
 from django import forms
 
-class DataKualifikasiForm(forms.Form):
-    TEMPAT_PELAKSANAAN = [
-        ('1', 'Indonesia'),
-        ('2', 'Jepang'),
-        ('3', 'Korea'),
-        ('4', 'China'),
-        ('5', 'Thailand'),
-    ]
-    TANGGAL_PELAKSANAAN = [
-        ('1', '2016-03-26'),
-        ('2', '2017-05-11'),
-        ('3', '2018-08-28'),
-        ('4', '2019-09-10'),
-        ('5', '2020-11-22'),
-    ]
-    nomor_batch = forms.CharField(
-        label='nomor batch',
+class BuatUjianKualifikasi(forms.Form):
+    tahun = forms.CharField(
+        label='tahun',
         min_length=1,
         max_length=150,
         widget=forms.TextInput(
-            attrs={'id': 'nomor-batch', 'placeholder': 'Nomor Batch'})
+            attrs={'id': 'tahun', 'placeholder': 'YYYY'})
+    )
+    batch = forms.CharField(
+        label='batch',
+        min_length=1,
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={'id': 'batch', 'placeholder': 'Nomor Batch'})
     )
     tempat_pelaksanaan = forms.CharField(
         label='tempat pelaksanaan',
-        widget=forms.Select(
-            choices=TEMPAT_PELAKSANAAN
-        )
+        min_length=1,
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={'id': 'tempat-pelaksanaan', 'placeholder': 'Tempat Pelaksanaan'})
     )
-    tanggal_pelaksanaan = forms.CharField(
-        label='tanggal pelaksanaan',
-        widget=forms.Select(
-            choices=TANGGAL_PELAKSANAAN
-        )
-    )
+    tanggal_pelaksanaan = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
 
 class PertanyaanKualifikasiForm(forms.Form):
     PILIHAN_NOMOR_SATU = [
-        ('1', 'China'),
-        ('2', 'Britain'),
-        ('3', 'Denmark'),
+        ('0', 'China'),
+        ('20', 'Britain'),
+        ('0', 'Denmark'),
     ]
     nomor_satu = forms.CharField(
         label='satu',
@@ -48,9 +37,9 @@ class PertanyaanKualifikasiForm(forms.Form):
         )
     )
     PILIHAN_NOMOR_DUA = [
-        ('1', '11'),
-        ('2', '16'),
-        ('3', '21'),
+        ('0', '11'),
+        ('0', '16'),
+        ('20', '21'),
     ]
     nomor_dua = forms.CharField(
         label='dua',
@@ -59,9 +48,9 @@ class PertanyaanKualifikasiForm(forms.Form):
         )
     )
     PILIHAN_NOMOR_TIGA = [
-        ('1', 'Badminton World Federation – BWF'),
-        ('2', 'International Badminton Association – IBA'),
-        ('3', 'Badminton World Organization – BWO'),
+        ('20', 'Badminton World Federation – BWF'),
+        ('0', 'International Badminton Association – IBA'),
+        ('0', 'Badminton World Organization – BWO'),
     ]
     nomor_tiga = forms.CharField(
         label='tiga',
@@ -70,9 +59,9 @@ class PertanyaanKualifikasiForm(forms.Form):
         )
     )
     PILIHAN_NOMOR_EMPAT = [
-        ('1', 'Before the game starts'),
-        ('2', 'After the game finishes'),
-        ('3', 'After the rally finishes'),
+        ('0', 'Before the game starts'),
+        ('0', 'After the game finishes'),
+        ('20', 'After the rally finishes'),
     ]
     nomor_empat = forms.CharField(
         label='empat',
@@ -81,9 +70,9 @@ class PertanyaanKualifikasiForm(forms.Form):
         )
     )
     PILIHAN_NOMOR_LIMA = [
-        ('1', 'Error'),
-        ('2', 'Fault'),
-        ('3', 'Mistake'),
+        ('0', 'Error'),
+        ('20', 'Fault'),
+        ('0', 'Mistake'),
     ]
     nomor_lima = forms.CharField(
         label='lima',

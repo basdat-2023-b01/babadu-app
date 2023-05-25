@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filter %}
 
 {% block meta %}
-<title>Babadu | Daftar Event</title>
+<title>Babadu | Tes Kualifikasi</title>
 {% endblock meta %}
 
 {% block content %}
@@ -28,38 +29,42 @@
         <section class="pt-4 border border-shark-400 rounded-lg overflow-hidden flex flex-col w-full">
             <section class="space-y-2">
                 <div class="text-xl text-center font-semibold pb-2 text-primary-500">
-                    DAFTAR EVENT
+                    LIST UJIAN KUALIFIKASI
                 </div>
                 <hr class="border-shark-400">
             </section>
-            <table class="min-w-full text-sm font-light text-center">
+            <table class="min-w-full text-sm font-light text-center" id="tabel-ujian-kualifikasi">
                 <thead class="border-b font-medium border-shark-400">
                     <tr>
-                        <th scope="col" class="px-6 py-4">Nama Event</th>
-                        <th scope="col" class="px-6 py-4">Total Hadiah</th>
-                        <th scope="col" class="px-6 py-4">Tanggal Mulai</th>
-                        <th scope="col" class="px-6 py-4">Kategori</th>
-                        <th scope="col" class="px-6 py-4">Action</th>
+                        <th scope="col" class="px-6 py-4">Tahun</th>
+                        <th scope="col" class="px-6 py-4">Batch</th>
+                        <th scope="col" class="px-6 py-4">Tempat Pelaksanaan</th>
+                        <th scope="col" class="px-6 py-4">Tanggal Pelaksanaan</th>
+                        {% if request.session.is_atlet %}
+                            <th scope="col" class="px-6 py-4">Action</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
-                    {% if list_event %}
-                        {% for event in list_event %}
+                    {% if list_ujian_kualifikasi %}
+                        {% for ujian_kualifikasi in list_ujian_kualifikasi %}
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.nama_event }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.total_hadiah }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.tgl_mulai }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ event.kategori_superseries }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">
-                                <a href="{{ event.url }}" class="hover:text-primary-500 hover:underline transition">
-                                    Pilih
-                                </a>
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tahun }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.batch }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tempat }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ ujian_kualifikasi.tanggal }}</td>
+                            {% if request.session.is_atlet %}
+                                <td class="whitespace-nowrap px-6 py-4">
+                                    <a href = "{{ ujian_kualifikasi.tahun }}/{{ ujian_kualifikasi.batch }}/{{ ujian_kualifikasi.tempat_url }}/{{ ujian_kualifikasi.tanggal_url }}" class="hover:text-primary-500 hover:underline transition">
+                                        Ikuti
+                                    </a>
+                                </td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     {% else %}
                     <tr class="transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400 text-center">
-                        <td colspan="6" class="text-center p-4">No Event</td>
+                        <td colspan="6" class="text-center p-4">Tidak ada Ujian Kualifikasi</td>
                     </tr>
                     {% endif %}
                 </tbody>

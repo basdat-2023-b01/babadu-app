@@ -28,6 +28,7 @@
         </section>
         <div class="w-full md:w-4/6 my-6 mx-auto h-auto py-4 border border-shark-500 rounded-lg">
             <form method="POST" action="" class="w-full flex flex-col gap-4">
+                {% csrf_token %}
                 <div class="text-2xl font-semibold text-primary-400 text-center">
                     PERTANYAAN KUALIFIKASI
                 </div>
@@ -38,7 +39,7 @@
                             1. The rules for modern badminton were developed in which country during the 19th century?
                         </div>
                         <div>
-                            {{pertanyaan_kualifikasi_form.nomor_satu | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                            {{pertanyaan_kualifikasi.nomor_satu | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
                         </div>
                     </div>
                     <hr class="border-shark-400">
@@ -47,7 +48,7 @@
                             2. In a badminton game, the winner is the first one to reach … points.
                         </div>
                         <div>
-                            {{pertanyaan_kualifikasi_form.nomor_dua | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                            {{pertanyaan_kualifikasi.nomor_dua | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
                         </div>
                     </div>
                     <hr class="border-shark-400">
@@ -56,7 +57,7 @@
                             3. What is the name of the international governing body for badminton recognised by the International Olympic Committee?
                         </div>
                         <div>
-                            {{pertanyaan_kualifikasi_form.nomor_tiga | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                            {{pertanyaan_kualifikasi.nomor_tiga | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
                         </div>
                     </div>
                     <hr class="border-shark-400">
@@ -65,7 +66,7 @@
                             4. When does the umpire call the score out loud during a badminton game?
                         </div>
                         <div>
-                            {{pertanyaan_kualifikasi_form.nomor_empat | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                            {{pertanyaan_kualifikasi.nomor_empat | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
                         </div>
                     </div>
                     <hr class="border-shark-400">
@@ -74,7 +75,7 @@
                             5. Which term is used when a player violates the rules?
                         </div>
                         <div>
-                            {{pertanyaan_kualifikasi_form.nomor_lima | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
+                            {{pertanyaan_kualifikasi.nomor_lima | addclass:"text-shark-400 pl-2 border-shark-400 accent-primary-500"}}
                         </div>
                     </div>
                 </section>
@@ -82,13 +83,46 @@
                 <section id="auth-login-submit" class="space-y-1 px-4">
                     <button
                         class="bg-primary-500 w-full py-2 rounded-lg hover:bg-primary-400 transition cursor-pointer text-white font-semibold"
-                        type="submit">
+                        type="submit" name="pertanyaan_kualifikasi_submit">
                         SUBMIT
                     </button>
                 </section>
             </form>
         </div>
     </div>
+    {% if messages %}
+    {% for message in messages %}
+    <section class="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">
+        <div class="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
+            <div class="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-midnight outline-none focus:outline-none">
+                <div class="px-8 py-12 flex flex-col gap-4">
+                    <div class="text-2xl text-center text-white font-semibold">
+                        Ujian Kualifikasi Tidak Dapat Diikuti
+                    </div>
+                    <hr class="border-shark-400 w-full">
+                    <div class="text-center text-danger">
+                        {{ message }}
+                    </div>
+                    <hr class="border-shark-400 w-full">
+                    <div>
+                        <h1 class="text-shark-200 text-base text-center">
+                            Kembali ke list ujian kualifikasi?
+                            <a class="text-primary-400 hover:underline transition"
+                                href="{% url 'tes-kualifikasi:atlet-list-ujian-kualifikasi' %}">
+                                List Ujian Kualifikasi
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    {% endif %}
 </section>
+
+<script>
+
+</script>
 
 {% endblock content %}
