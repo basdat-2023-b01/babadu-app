@@ -163,12 +163,9 @@ def daftar_partai_kompetisi(request, stadium, event, tahun):
                             query = insert_partai_peserta_kompetisi_query('XD', event, tahun, nomor_peserta)
                         cursor.execute(query)
                 except Exception as e:
-                    if e is InternalError:
-                        trimmed_string = re.sub(r'\(|\)|\'', '', str(e.args))
-                        message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
-                        messages.info(request, message)
-                    else:
-                        pass
+                    trimmed_string = re.sub(r'\(|\)|\'', '', str(e.args))
+                    message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
+                    messages.info(request, message)
                 else:
                     return redirect(request.META['HTTP_REFERER'])
 
