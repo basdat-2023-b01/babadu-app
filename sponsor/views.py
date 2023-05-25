@@ -4,8 +4,9 @@ from datetime import datetime
 from sponsor.query import *
 from django.db import connection, InternalError
 from base.helper.function import parse
+from django.views.decorators.csrf import csrf_exempt
 
-# Create your views here.
+@csrf_exempt
 def daftar_sponsor_view(request):
     if "id" not in request.session or not request.session['is_atlet']:
         return redirect('main:main')
