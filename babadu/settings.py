@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&4w-vm$%68kd)m+s81fmrln$+oc4pwo5wl0qer8z=rdroqc%!&
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = [f'babadu-basdat-b01.up.railway.app']
 
 # Application definition
 
@@ -116,6 +116,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOW_CREDENTIALS=True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
