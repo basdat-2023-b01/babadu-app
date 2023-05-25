@@ -90,11 +90,12 @@ DATABASES = {
         },
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'PASSWORD': 'basdat-b01-db-123',
+        'HOST': 'db.pdsrhktaquutwydfiwwj.supabase.co',
         'PORT': '5432'
     }
 }
+
 
 
 # Password validation
