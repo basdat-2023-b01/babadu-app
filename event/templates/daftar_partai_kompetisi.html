@@ -91,10 +91,16 @@
                             <td class="whitespace-nowrap px-6 py-4">
                                 {{ form.2 }} / {{ kapasitas }}
                             </td>
+                            {% if form.2 < kapasitas %}
                             <td class="whitespace-nowrap px-6 py-4">
                                 <button class="hover:text-primary-500 hover:underline transition" type="submit"
                                     name="{{ form.0 }}">Join</button>
                             </td>
+                            {% else %}
+                            <td class="whitespace-nowrap px-6 py-4">
+                                <h1>Sudah Penuh</h1>
+                            </td>
+                            {% endif %}
                         </tr>
                     </form>
                     {% endfor %}
