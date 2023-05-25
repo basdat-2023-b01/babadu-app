@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect
 from atlet.query import *
 from django.db import connection
 from base.helper.function import parse
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def daftar_atlet_view(request):
     if "id" not in request.session or not request.session['is_pelatih']:
         return redirect('main:main')

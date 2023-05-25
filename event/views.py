@@ -8,6 +8,7 @@ from event.query import *
 from base.helper.function import parse
 from event.helper import convert_to_slug, convert_to_title
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 def lihat_event_view(request):
     if "id" not in request.session or not request.session['is_atlet']:
@@ -53,7 +54,7 @@ def daftar_event_view(request, stadium):
             
     return render(request, 'daftar_event.html', context)
 
-
+@csrf_exempt
 def daftar_partai_kompetisi(request, stadium, event, tahun):
     if "id" not in request.session or not request.session['is_atlet']:
         return redirect('main:main')
@@ -184,6 +185,7 @@ def enrolled_partai_kompetisi_event_view(request):
     context = {'events': res}
     return render(request, 'enrolled_partai_kompetisi_event.html', context)
 
+@csrf_exempt
 def enrolled_event_view(request):
     if "id" not in request.session or not request.session['is_atlet']:
         return redirect('main:main')

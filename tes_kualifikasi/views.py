@@ -6,7 +6,9 @@ from base.helper.function import parse
 from tes_kualifikasi.helper import *
 from django.contrib import messages
 import datetime
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def buat_ujian_kualifikasi_view(request):
     if "id" not in request.session or not request.session['is_umpire']:
         return redirect('main:main')
@@ -66,6 +68,7 @@ def atlet_list_ujian_kualifikasi_view(request):
 
     return render(request, 'list_ujian_kualifikasi.html', context)
 
+@csrf_exempt
 def pertanyaan_kualifikasi_view(request, tahun, batch, tempat, tanggal):
     if "id" not in request.session or not request.session['is_atlet']:
         return redirect('main:main')

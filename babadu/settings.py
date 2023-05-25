@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&4w-vm$%68kd)m+s81fmrln$+oc4pwo5wl0qer8z=rdroqc%!&
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = [f'babadu-basdat-b01.up.railway.app']
+CSRF_TRUSTED_ORIGINS = [f'https://babadu-basdat-b01.up.railway.app/']
 
 # Application definition
 

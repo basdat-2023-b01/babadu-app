@@ -8,7 +8,9 @@ from base.helper.function import parse
 from authentication.forms import *
 from authentication.constant import *
 from authentication.query import *
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def login(request):
     if request.method == 'POST':
         nama = request.POST.get('nama')
@@ -40,6 +42,7 @@ def login(request):
     context = {'login_form': LoginForm()}
     return render(request, 'login.html', context)
 
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         if 'atlet_submit' in request.POST:
@@ -95,6 +98,7 @@ def register(request):
         'umpire_form': RegisterUmpireForm(),
     }
     return render(request, 'register.html', context)
+
 
 def atlet_register(nama, email, negara, tanggal_lahir, play, tinggi_badan, jenis_kelamin):
     try:
