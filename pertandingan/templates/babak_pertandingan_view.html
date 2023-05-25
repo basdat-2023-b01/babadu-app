@@ -3,6 +3,65 @@
 
 {% block meta %}
 <title>Babadu | Event Pertandingan</title>
+
+<Script>
+
+    // Waktu
+    var detik = {};
+    var menit = {};
+    var jam = {};
+
+    function displayTime(id) {
+        if (detik[id] == null) {
+            detik[id] = 0;
+        }
+
+        if (menit[id] == null) {
+            menit[id] = 0;
+        }
+
+        if (jam[id] == null){
+            jam[id] = 0;
+        }
+
+        detik[id]++;
+
+        if (detik[id] >= 60) {
+            detik[id] = 0;
+            menit[id]++;
+            if (menit[id] >= 60) {
+            menit[id] = 0;
+            menit[id]++;
+            }
+        }
+
+        var stopwatchElement = document.querySelectorAll("#timer");
+        if (stopwatchElement == null) {
+            return;
+        }
+
+        if (stopwatchElement.length > 1) {
+            stopwatchElement[0].innerHTML = (jam[id] ? (jam[id] > 9 ? jam[id] : "0" + jam[id]) : "00") + ":" + (menit[id] ? (menit[id] > 9 ? menit[id] : "0" + menit[id]) : "00") + ":" + (detik[id] > 9 ? detik[id] : "0" + detik[id]);
+            stopwatchElement[1].innerHTML = (jam[id] ? (jam[id] > 9 ? jam[id] : "0" + jam[id]) : "00") + ":" + (menit[id] ? (menit[id] > 9 ? menit[id] : "0" + menit[id]) : "00") + ":" + (detik[id] > 9 ? detik[id] : "0" + detik[id]);
+        }
+        stopwatchElement[0].innerHTML = (jam[id] ? (jam[id] > 9 ? jam[id] : "0" + jam[id]) : "00") + ":" + (menit[id] ? (menit[id] > 9 ? menit[id] : "0" + menit[id]) : "00") + ":" + (detik[id] > 9 ? detik[id] : "0" + detik[id]);
+    }
+
+    function matchTimer(id) {
+        var timerElement = document.getElementById("timer-input");
+        if (timerElement == null) {
+            return;
+        }
+
+        timerElement.value++;
+    }
+    var stopwatchFunction;
+    var timeInSecondsFunction;
+    window.onload = function() {
+        stopwatchFunction = setInterval(displayTime, 1000, 1);
+        timeInSecondsFunction = setInterval(matchTimer, 1000, 1);
+    }
+</script>
 {% endblock meta %}
 
 {% block content %}
@@ -31,7 +90,7 @@
                     PERTANDINGAN PEREMPAT FINAL
                 </div>
                 <div class="text-md text-center text-primary-400">
-                    [ 00:00 ]
+                <p id="timer" class="text-2xl text-center">00:00:00</p>
                 </div>
                 <hr class="border-shark-400">
             </section>
