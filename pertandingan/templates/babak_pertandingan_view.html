@@ -5,6 +5,26 @@
 <title>Babadu | Event Pertandingan</title>
 
 <Script>
+    // Skor
+    var counters = {};
+
+    function incrementCount(counterId) {
+        var counterElement = document.getElementById(counterId + '+input');
+        var counterValue = parseInt(counterElement.value);
+        if (counterValue < 100) {
+            counterElement.value = counterValue + 1;
+            document.getElementById(counterId + '-span').innerHTML = counterElement.value;
+        }
+    }
+
+    function decrementCount(counterId) {
+        var counterElement = document.getElementById(counterId + '+input');
+        var counterValue = parseInt(counterElement.value);
+        if (counterValue > 0) {
+            counterElement.value = counterValue - 1;
+            document.getElementById(counterId + '-span').innerHTML = counterElement.value;
+        }
+    }
 
     // Waktu
     var detik = {};
@@ -107,72 +127,27 @@
                     <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
                         <td class="whitespace-nowrap px-6 py-4">A</td>
                         <td class="whitespace-nowrap px-6 py-4">B</td>
-                        <td class="whitespace-nowrap px-6 py-4">
+                        <!-- <td class="whitespace-nowrap px-6 py-4">
                             <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
                                 <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
                                 <div class="text-white">1</div>
                                 <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
                             </div>
-                        </td>
-                        <td class="whitespace-nowrap px-6 py-4">
+                        </td> -->
+                        <!-- <td class="whitespace-nowrap px-6 py-4">
                             <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
                                 <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
                                 <div class="text-white">4</div>
                                 <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
                             </div>
-                        </td>
-                    </tr>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">C</td>
-                        <td class="whitespace-nowrap px-6 py-4">D</td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
-                                <div class="text-white">8</div>
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
-                            </div>
-                        </td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
-                                <div class="text-white">4</div>
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">E</td>
-                        <td class="whitespace-nowrap px-6 py-4">F</td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
-                                <div class="text-white">0</div>
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
-                            </div>
-                        </td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
-                                <div class="text-white">7</div>
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                        <td class="whitespace-nowrap px-6 py-4">G</td>
-                        <td class="whitespace-nowrap px-6 py-4">H</td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
-                                <div class="text-white">4</div>
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
-                            </div>
-                        </td>
-                        <td class="whitespace-nowrap px-6 py-4">
-                            <div class="flex flex-row justify-center items-center gap-x-4 text-shark-400">
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8593;</div>
-                                <div class="text-white">5</div>
-                                <div class="text-lg font-semibold cursor-pointer hover:text-primary-500 ">&#8595;</div>
+                        </td> -->
+                        <td class="whitespace-nowrap px-6 py-4" id="{{ tim.0.id }}-counter" name="counter">
+                            {{tim.0.nama}}
+                            <div>
+                                <button type="button" class="text-lg font-semibold cursor-pointer hover:text-primary-500 " onclick="decrementCount('{{ tim.0.id }}')">&#8595;</button>
+                                <input type="number" value="0" id="{{ tim.0.id }}+input" name="counter+{{ tim.0.id }}" style="display: none">
+                                <span id="{{ tim.0.id }}-span"> 0 </span>
+                                <button type="button" class="text-lg font-semibold cursor-pointer hover:text-primary-500 " onclick="incrementCount('{{ tim.0.id }}')">&#8593;</button>
                             </div>
                         </td>
                     </tr>
