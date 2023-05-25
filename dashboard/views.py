@@ -27,9 +27,12 @@ def dashboard_view(request):
         pelatih = ', '.join(pelatih)
         context['pelatih'] = pelatih
         if context['status_kualifikasi'] == 'Qualified':
+            request.session['is_terkualifikasi'] = True
             query = get_atlet_kualifikasi_detail_query(request.session['id'])
             cursor.execute(query)
             context['total_point'] = parse(cursor)[0]['total_points']
+        else:
+            request.session['is_terkualifikasi'] = False
             
     elif request.session['is_pelatih']:
         cursor = connection.cursor()

@@ -20,6 +20,7 @@ def daftar_atlet_view(request):
     if request.method == 'POST' and 'daftar_atlet_submit' in request.POST and form.is_valid():
         id_atlet = form.cleaned_data['daftar_atlet']
         query = insert_atlet_pelatih_query(id_atlet, request.session['id'])
+        print(query)
         cursor.execute("set search_path to babadu;")
         cursor.execute(query)
         return redirect('atlet:lihat')
@@ -30,6 +31,8 @@ def daftar_atlet_view(request):
     return render(request, 'daftar_atlet.html', context)
 
 def pelatih_lihat_atlet_view(request):
+    if "id" not in request.session or not request.session['is_pelatih']:
+        return redirect('main:main')
     query = get_atlet_dilatih_query(request.session['id'])
     cursor = connection.cursor()
     cursor.execute("set search_path to babadu;")
