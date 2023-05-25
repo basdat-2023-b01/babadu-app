@@ -69,12 +69,10 @@ def pertandingan_view(request, event, tahun, jenis_partai, jenis_babak):
 
     for n in peserta_kompetisi:
         if n[0][1] == None:
-            #tunggal
             cursor.execute("select * from member where id = %s", [n[0][2]])
             tunggal = cursor.fetchall()
             peserta_tunggal.append([tunggal[0][0], tunggal [0][1]])
         else:
-            # ganda
             cursor.execute("select * from atlet_ganda where \n"
                             "id_atlet_ganda = %s", [n[0][1]])
             ganda = cursor.fetchall()
@@ -145,7 +143,5 @@ def pertandingan_view(request, event, tahun, jenis_partai, jenis_babak):
             context["pertandingan"][0]["tim"].append(pasangan)
             pasangan = []
             count = 0
-
-
 
     return render(request, "babak_pertandingan_view.html", context)
